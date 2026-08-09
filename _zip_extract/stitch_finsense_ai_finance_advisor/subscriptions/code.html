@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinSense - Subscriptions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#6ffbbe",
+                    "on-primary-fixed-variant": "#00504a",
+                    "tertiary-container": "#7948e3",
+                    "primary-fixed": "#9cf2e8",
+                    "primary-container": "#0f766e",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#005236",
+                    "surface-container-highest": "#dce2f3",
+                    "surface": "#f9f9ff",
+                    "inverse-surface": "#2a313d",
+                    "secondary-fixed-dim": "#4edea3",
+                    "surface-container-low": "#f0f3ff",
+                    "on-background": "#151c27",
+                    "inverse-primary": "#80d5cb",
+                    "surface-bright": "#f9f9ff",
+                    "on-tertiary-fixed-variant": "#5516be",
+                    "outline": "#6e7977",
+                    "primary": "#005c55",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#002113",
+                    "surface-container": "#e7eefe",
+                    "secondary": "#006c49",
+                    "on-secondary-container": "#00714d",
+                    "surface-variant": "#dce2f3",
+                    "secondary-container": "#6cf8bb",
+                    "on-tertiary-container": "#f0e6ff",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e2e8f8",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#006a63",
+                    "outline-variant": "#bdc9c6",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#3e4947",
+                    "on-surface": "#151c27",
+                    "surface-dim": "#d3daea",
+                    "tertiary-fixed": "#e9ddff",
+                    "tertiary-fixed-dim": "#d0bcff",
+                    "error": "#ba1a1a",
+                    "background": "#f9f9ff",
+                    "on-primary-container": "#a3faef",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#6029c9",
+                    "primary-fixed-dim": "#80d5cb",
+                    "on-primary-fixed": "#00201d",
+                    "on-tertiary-fixed": "#23005c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "container-max": "1280px",
+                    "xl": "64px",
+                    "xs": "8px",
+                    "sm": "16px",
+                    "gutter": "24px",
+                    "md": "24px",
+                    "lg": "40px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.25", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-ai {
+            background: rgba(240, 230, 255, 0.4);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(121, 72, 227, 0.2);
+        }
+        .swipe-action {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .list-container {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .list-container::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top App Bar -->
+<header class="bg-surface dark:bg-on-background shadow-sm dark:shadow-none docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center px-md py-xs w-full max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="show_chart">show_chart</span>
+<span>FinSense</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity" data-icon="notifications">notifications</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a young executive with a friendly expression. The lighting is soft and directional, creating a clean, high-trust fintech corporate aesthetic. The background is a neutral, light gray gradient that feels modern and sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4FWcodSHmbl65UvZV1ji12yhtIsnfPgiH0eXzP1sjf5N7fAFklgLOJnvtgtb2krrdNPb3HTt_FGDClJkCPgoQc2qPjHeSKqOekz5v6ynrgdTA1LN4_oIvELCLxArV44Sht8Y6gYRbTLLLdC8skhgNWoQK35sl4RhkbSYfg9sn9h5PZbdEy-ao65cEcsEI7e8BC7nVz5Gnm_t9zkvZHw1b9OrvlAofdSCp02I5tz_JssGtRVvYfPcVag"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-sm md:px-md py-md pb-32">
+<!-- Summary Section (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-lg">
+<div class="md:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-sm">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1 uppercase tracking-wider">Total Monthly Commitments</p>
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">$127.94<span class="text-on-surface-variant font-normal">/month</span></h1>
+</div>
+<div class="bg-error-container text-on-error-container px-3 py-1 rounded-full flex items-center gap-1 animate-pulse">
+<span class="material-symbols-outlined text-[18px]" data-icon="warning">warning</span>
+<span class="font-label-sm text-label-sm">2 unused detected</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex-1 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4 rounded-full"></div>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">$1,535/year</span>
+</div>
+</div>
+<div class="md:col-span-4 bg-tertiary text-on-tertiary rounded-xl p-md flex flex-col justify-between shadow-lg">
+<div class="flex justify-between">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 bg-on-tertiary/20 rounded">BETA</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md mb-1">Optimization</p>
+<p class="font-body-md text-on-tertiary/80">You can reduce monthly spend by 26%.</p>
+</div>
+</div>
+</div>
+<!-- Subscription List -->
+<section>
+<div class="flex justify-between items-center mb-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface">Subscribed Services</h2>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span> Filter
+                </button>
+</div>
+<div class="space-y-3 list-container">
+<!-- Item 1: Active & Price Increase -->
+<div class="group relative overflow-hidden bg-surface-container-lowest border border-outline-variant rounded-xl hover:shadow-md transition-all duration-300">
+<div class="flex items-center justify-between p-md swipe-action">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimalist logo for a streaming service, featuring clean geometric shapes and a vibrant red and black color scheme. The aesthetic is corporate yet modern, suitable for a high-end fintech interface's subscription list." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpx-EFYh7eMG_1EP0GhkYKP8R0w16AtIWCtw9sQM66Ld72cmTml9vvH6sfnQzjDsKkEEeoIGW8u6Xq2VPykvLpuNvvMmtayRnyK-8S4vWRLAXIGtnWIfzyn6vsl8TODUrantzYbGguzBIsmuHAYd-lICstUFQkVQi1TcBaNeA9cxLzPAzqBs-RSeMiGLM_s7vVQa0J8uBfc_G9rsSb_xxmxd_iHoyU6-ncIVW4OJesmTx31gTl7xXaxQ"/>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Netflix Premium</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Monthly · Next: Mar 28</p>
+<div class="flex gap-2 mt-1">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/30 text-on-secondary-container font-label-sm text-[10px]">Active</span>
+<div class="flex items-center gap-1 text-error font-label-sm text-[10px] bg-error-container/20 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[12px]" data-icon="trending_up">trending_up</span>
+                                        Price increased
+                                    </div>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-on-surface">$19.99</p>
+<div class="flex items-center justify-end gap-1 text-on-surface-variant font-label-sm">
+<span class="line-through">$15.99</span>
+<span class="material-symbols-outlined text-[14px] text-error" data-icon="north_east">north_east</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2: Unused Detected -->
+<div class="group relative overflow-hidden bg-surface-container-lowest border border-outline-variant rounded-xl hover:shadow-md transition-all duration-300">
+<!-- Swipe Action Background -->
+<div class="absolute inset-y-0 right-0 w-24 bg-error text-on-error flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+<span class="material-symbols-outlined" data-icon="archive">archive</span>
+<span class="text-[10px] font-bold">UNUSED</span>
+</div>
+<div class="flex items-center justify-between p-md swipe-action group-hover:-translate-x-12 bg-surface-container-lowest">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A sleek corporate logo for a professional design software suite. The logo uses deep blues and violets with a subtle metallic sheen, reflecting a premium creative tool aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpV3ULQk9n_RngfUAPfwfOtf72XyRw-MYB_ZMlSVyTUzU2SH06fbA7ikJz8NofT8yC6tewXKlvYJ5V6AFkGhupQf87ZuAvzPVt3C3_0ihDzNsd2gvgGp5ET4-I4rcFeTZnoi0-d-tj0BJ4XaynAh8PMmnb0EOo-YPh8Eg-BLS8G8jHwNSePPweetd4fhCKQhVtssJj1luJgdcxD0qtQRKH0i3_YGi2vxszshy_tMTdwxinKLw2TkLaXA"/>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Adobe Creative Cloud</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Monthly · Next: Apr 02</p>
+<div class="flex gap-2 mt-1">
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-[10px]">Unused</span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-on-surface">$54.99</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Individual Plan</p>
+</div>
+</div>
+</div>
+<!-- Item 3: Price Change Detail -->
+<div class="group relative overflow-hidden bg-surface-container-lowest border border-outline-variant rounded-xl hover:shadow-md transition-all duration-300">
+<div class="flex items-center justify-between p-md swipe-action">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Minimalist music streaming service logo with a circular motif in neon green and deep black, styled with a high-contrast corporate modern look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjIAsLXtRfEtxpX5SWTdj2KRXlJICYMzngdOQlUHHzJlKyPa1FvKN7PHj8Hbv8fQrE3WUS6kLX7CtgVJp0Mry-4Vt-iMs0vPSjlrqqk6vq9PEb0993YgHDQO3JRlbrqGswzbETiLefVD1LwzTJWY7TsX9B4fvWGewiIO2AhqydUicZ_jkp85s5U-aOCgKzz9UtZmwc5s_NOCaj23fWsHYTqsGPuT6snnnaGfQQ3Qpwxhe1DO4QsSG5Ng"/>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Spotify Premium</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Monthly · Next: Apr 12</p>
+<div class="flex gap-2 mt-1">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/30 text-on-secondary-container font-label-sm text-[10px]">Active</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-[10px]">Family</span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<div class="flex items-center justify-end gap-2">
+<span class="text-on-surface-variant line-through font-label-md">$9.99</span>
+<span class="material-symbols-outlined text-error text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+<span class="font-headline-md text-headline-md text-on-surface">$12.99</span>
+</div>
+<p class="font-label-sm text-label-sm text-error/80">Pending update</p>
+</div>
+</div>
+</div>
+<!-- Item 4: Regular Active -->
+<div class="group relative overflow-hidden bg-surface-container-lowest border border-outline-variant rounded-xl hover:shadow-md transition-all duration-300">
+<div class="flex items-center justify-between p-md swipe-action">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A simple, elegant cloud storage provider logo with soft blue gradients and a clean white background. Minimalist and corporate professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWTNQsojJ6CfZxDN4f016kUy6G8dDtZ4qnHznv6VwtRg-vC38uCxQrKfSPF4oPhfB5VXslDv1-vTyqjz6GDLjbfl1FKpNMLpbHXQjNIoeRsemXDWOwEt_kRK4JXW7Tpj8YxnZReKneo_q144mR_6kKQ3BJhWdFmWXN52wTsd2Xn32oit0nzlF4c9c8uVEnrYks3OQcqdpnx4KVbrU5yY12G0d_QjJnWv_d8tb9ju9LWpLKsm4lffPfTg"/>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">iCloud+ Storage</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Monthly · Next: Mar 30</p>
+<div class="flex gap-2 mt-1">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/30 text-on-secondary-container font-label-sm text-[10px]">Active</span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-on-surface">$0.99</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">50GB Plan</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Insight Insight Card -->
+<div class="mt-lg glass-ai p-md rounded-2xl flex items-start gap-md border-l-4 border-l-tertiary">
+<div class="bg-tertiary text-on-tertiary p-2 rounded-lg">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-tertiary mb-1">AI Recommendation</h4>
+<p class="font-body-md text-on-surface">Cancelling <span class="font-bold">2 unused subscriptions</span> (Adobe Creative Cloud &amp; Fitness+ ) could save you <span class="text-secondary font-bold">$336/year</span>. Would you like to start the cancellation process?</p>
+<div class="mt-sm flex gap-sm">
+<button class="bg-tertiary text-on-tertiary px-sm py-xs rounded-full font-label-md text-label-md hover:opacity-90 transition-all flex items-center gap-1">
+                        Review Cancellation <span class="material-symbols-outlined text-[18px]" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="border border-tertiary text-tertiary px-sm py-xs rounded-full font-label-md text-label-md hover:bg-tertiary/10 transition-all">
+                        Dismiss
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-sm pb-4 pt-2 border-t border-outline-variant dark:border-outline bg-surface dark:bg-on-background shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-label-sm font-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-label-sm font-label-sm">Transactions</span>
+</a>
+<button class="bg-tertiary-container text-on-tertiary-container rounded-full p-4 -mt-10 shadow-lg hover:scale-110 transition-all active:scale-95 group">
+<span class="material-symbols-outlined text-[32px] group-hover:rotate-12 transition-transform" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</button>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim bg-secondary-container/20 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="event_note" style="font-variation-settings: 'FILL' 1;">event_note</span>
+<span class="text-label-sm font-label-sm">Plan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-label-sm font-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple swipe-to-reveal simulation for the Unused detected item
+        document.querySelectorAll('.swipe-action').forEach(card => {
+            let startX = 0;
+            let currentX = 0;
+            
+            card.addEventListener('touchstart', e => {
+                startX = e.touches[0].clientX;
+            });
+            
+            card.addEventListener('touchmove', e => {
+                currentX = e.touches[0].clientX;
+                const diff = startX - currentX;
+                if (diff > 50 && diff < 150) {
+                    card.style.transform = `translateX(-${diff}px)`;
+                }
+            });
+            
+            card.addEventListener('touchend', e => {
+                const diff = startX - currentX;
+                if (diff > 100) {
+                    card.style.transform = 'translateX(-120px)';
+                } else {
+                    card.style.transform = 'translateX(0px)';
+                }
+            });
+        });
+    </script>
+</body></html>

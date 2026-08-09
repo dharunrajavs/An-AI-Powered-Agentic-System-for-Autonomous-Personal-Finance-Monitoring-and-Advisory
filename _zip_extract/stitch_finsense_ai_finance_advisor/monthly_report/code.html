@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinSense - March 2026 AI Report</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#6ffbbe",
+                    "on-primary-fixed-variant": "#00504a",
+                    "tertiary-container": "#7948e3",
+                    "primary-fixed": "#9cf2e8",
+                    "primary-container": "#0f766e",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#005236",
+                    "surface-container-highest": "#dce2f3",
+                    "surface": "#f9f9ff",
+                    "inverse-surface": "#2a313d",
+                    "secondary-fixed-dim": "#4edea3",
+                    "surface-container-low": "#f0f3ff",
+                    "on-background": "#151c27",
+                    "inverse-primary": "#80d5cb",
+                    "surface-bright": "#f9f9ff",
+                    "on-tertiary-fixed-variant": "#5516be",
+                    "outline": "#6e7977",
+                    "primary": "#005c55",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#002113",
+                    "surface-container": "#e7eefe",
+                    "secondary": "#006c49",
+                    "on-secondary-container": "#00714d",
+                    "surface-variant": "#dce2f3",
+                    "secondary-container": "#6cf8bb",
+                    "on-tertiary-container": "#f0e6ff",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e2e8f8",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#006a63",
+                    "outline-variant": "#bdc9c6",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#3e4947",
+                    "on-surface": "#151c27",
+                    "surface-dim": "#d3daea",
+                    "tertiary-fixed": "#e9ddff",
+                    "tertiary-fixed-dim": "#d0bcff",
+                    "error": "#ba1a1a",
+                    "background": "#f9f9ff",
+                    "on-primary-container": "#a3faef",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#6029c9",
+                    "primary-fixed-dim": "#80d5cb",
+                    "on-primary-fixed": "#00201d",
+                    "on-tertiary-fixed": "#23005c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "container-max": "1280px",
+                    "xl": "64px",
+                    "xs": "8px",
+                    "sm": "16px",
+                    "gutter": "24px",
+                    "md": "24px",
+                    "lg": "40px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.25", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-ai {
+            background: rgba(121, 72, 227, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(121, 72, 227, 0.2);
+        }
+        .health-ring {
+            background: conic-gradient(from 0deg, #ffffff 78%, transparent 78%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden pb-32">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-50 bg-surface shadow-sm w-full">
+<div class="flex justify-between items-center px-md py-xs w-full max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">show_chart</span>
+                FinSense
+            </div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:opacity-80 transition-opacity">share</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border-2 border-primary-fixed">
+<img class="w-full h-full object-cover" data-alt="A professional corporate headshot of a smiling business professional in a clean, minimalist setting. High-quality lighting, soft shadows, and a sophisticated atmosphere that aligns with a premium fintech brand. The background is a soft, out-of-focus modern office environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEcWOCXSsYfaBWcPNioPe17V2IF4CO7Ht69asBpbnnyLKnD271apas1A897ylG2pjRyHr6lzn4PADGqFWY5T4ZmX2Y09D-tQfCsKZeaq1zap6wPxE0_ZFrtAm0UNFPRVVY_NA-V8DcqVxHWxSF5JKaCLPuqVqEuWXwyUz7_KkecVLgg2Csaro4HIWS_kUxe7QRtNqtmYS_KvZP9O63X7anuuNU0WVd-lQ_lbocC0fVtTkmvKfiWUfmQQ"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-sm md:px-md py-md">
+<!-- Hero Section -->
+<section class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-primary to-primary-container p-sm md:p-lg text-on-primary shadow-lg mb-lg">
+<div class="absolute top-0 right-0 w-64 h-64 opacity-10">
+
+</div>
+<div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-md">
+<div class="flex flex-col gap-2 text-center md:text-left">
+<span class="text-label-md font-label-md opacity-80">AI FINANCIAL SUMMARY</span>
+<h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg">March 2026 Report</h1>
+<div class="flex items-center gap-2 bg-on-primary/10 self-center md:self-start px-3 py-1 rounded-full mt-2">
+<span class="material-symbols-outlined text-[18px]">trending_up</span>
+<span class="text-label-md">Good — up 5 points from Feb</span>
+</div>
+</div>
+<div class="relative flex items-center justify-center">
+<div class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-on-primary/20 flex items-center justify-center">
+<div class="absolute inset-0 rounded-full border-4 border-on-primary border-t-transparent -rotate-45"></div>
+<div class="text-center">
+<div class="text-display-lg font-display-lg">78</div>
+<div class="text-label-sm uppercase tracking-wider opacity-80">Score</div>
+</div>
+</div>
+</div>
+<div class="flex gap-sm">
+<button class="bg-on-primary text-primary px-sm py-xs rounded-full font-label-md flex items-center gap-2 hover:bg-opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                        Download
+                    </button>
+<button class="bg-transparent border border-on-primary text-on-primary px-sm py-xs rounded-full font-label-md flex items-center gap-2 hover:bg-on-primary/10 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">share</span>
+                        Share
+                    </button>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- 1. Overview Section -->
+<section class="md:col-span-12 lg:col-span-4 bg-surface border border-outline-variant rounded-2xl p-md shadow-sm">
+<h2 class="text-headline-md font-headline-md mb-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                    Overview
+                </h2>
+<div class="space-y-sm">
+<div class="flex justify-between items-center p-sm bg-surface-container-low rounded-xl">
+<div>
+<p class="text-label-sm text-on-surface-variant">Total Income</p>
+<p class="text-headline-md font-headline-md text-on-surface">$8,450.00</p>
+</div>
+<span class="material-symbols-outlined text-secondary text-[32px]">payments</span>
+</div>
+<div class="flex justify-between items-center p-sm bg-surface-container-low rounded-xl">
+<div>
+<p class="text-label-sm text-on-surface-variant">Spent</p>
+<p class="text-headline-md font-headline-md text-on-surface">$5,230.00</p>
+</div>
+<span class="material-symbols-outlined text-error text-[32px]">shopping_cart</span>
+</div>
+<div class="flex justify-between items-center p-sm bg-surface-container-low rounded-xl">
+<div>
+<p class="text-label-sm text-on-surface-variant">Saved</p>
+<p class="text-headline-md font-headline-md text-primary">$3,220.00</p>
+</div>
+<span class="material-symbols-outlined text-primary text-[32px]">savings</span>
+</div>
+</div>
+</section>
+<!-- 2. Donut Chart Section -->
+<section class="md:col-span-12 lg:col-span-8 bg-surface border border-outline-variant rounded-2xl p-md shadow-sm">
+<h2 class="text-headline-md font-headline-md mb-md">Where your money went</h2>
+<div class="flex flex-col md:flex-row items-center justify-around gap-lg">
+<!-- Fake SVG Donut -->
+<div class="relative w-48 h-48">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#E5E7EB" stroke-width="3"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#005c55" stroke-dasharray="40 60" stroke-width="3"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#7948e3" stroke-dasharray="25 75" stroke-dashoffset="-40" stroke-width="3"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#006c49" stroke-dasharray="20 80" stroke-dashoffset="-65" stroke-width="3"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#ba1a1a" stroke-dasharray="15 85" stroke-dashoffset="-85" stroke-width="3"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center flex-col">
+<span class="text-label-sm text-on-surface-variant">Total</span>
+<span class="text-headline-md font-headline-md">$5,230</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-sm w-full max-w-xs">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-label-md">Housing (40%)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-tertiary-container"></div>
+<span class="text-label-md">Invest (25%)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span class="text-label-md">Food (20%)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-error"></div>
+<span class="text-label-md">Others (15%)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Your Wins (Green Tint) -->
+<section class="md:col-span-12 lg:col-span-6 bg-secondary-container/10 border border-secondary/20 rounded-2xl p-md shadow-sm">
+<h3 class="text-headline-md font-headline-md text-secondary mb-sm flex items-center gap-2">
+<span class="material-symbols-outlined fill-icon">check_circle</span>
+                    Your wins
+                </h3>
+<ul class="space-y-sm">
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-secondary mt-1">done</span>
+<p class="text-body-md text-on-surface">Reduced dining expenses by <span class="font-bold text-secondary">12%</span> compared to February.</p>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-secondary mt-1">done</span>
+<p class="text-body-md text-on-surface">Met your monthly emergency fund contribution goal early.</p>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-secondary mt-1">done</span>
+<p class="text-body-md text-on-surface">Credit score increased to 745 after debt repayment strategy.</p>
+</li>
+</ul>
+</section>
+<!-- 4. Watch out for (Amber Tint) -->
+<section class="md:col-span-12 lg:col-span-6 bg-[#fffbeb] border border-amber-200 rounded-2xl p-md shadow-sm">
+<h3 class="text-headline-md font-headline-md text-amber-700 mb-sm flex items-center gap-2">
+<span class="material-symbols-outlined fill-icon">warning</span>
+                    Watch out for
+                </h3>
+<ul class="space-y-sm">
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-amber-600 mt-1">info</span>
+<p class="text-body-md text-on-surface">Subscription costs rose by <span class="font-bold text-amber-700">$45</span> this month (3 new services).</p>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-amber-600 mt-1">info</span>
+<p class="text-body-md text-on-surface">Utility bills are trending higher than the seasonal average.</p>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-amber-600 mt-1">info</span>
+<p class="text-body-md text-on-surface">Upcoming car insurance renewal is higher than estimated.</p>
+</li>
+</ul>
+</section>
+<!-- 5. Do this next (AI Specialist Cards) -->
+<section class="md:col-span-12 glass-ai rounded-3xl p-md md:p-lg">
+<div class="flex items-center gap-2 mb-md">
+<span class="material-symbols-outlined text-tertiary fill-icon">auto_awesome</span>
+<h2 class="text-headline-md font-headline-md text-tertiary">Do this next</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Action 1 -->
+<div class="bg-surface p-sm rounded-2xl border border-tertiary/20 flex flex-col justify-between hover:shadow-md transition-all">
+<div>
+<div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-bold mb-xs">1</div>
+<h4 class="font-headline-md text-[18px] mb-xs">Cancel inactive "Streamly"</h4>
+<p class="text-label-md text-on-surface-variant mb-md">You haven't used this subscription in 60 days. Saving: $14.99/mo.</p>
+</div>
+<button class="w-full bg-tertiary text-on-tertiary py-xs rounded-xl font-label-md hover:opacity-90 active:scale-95 transition-all">Do it</button>
+</div>
+<!-- Action 2 -->
+<div class="bg-surface p-sm rounded-2xl border border-tertiary/20 flex flex-col justify-between hover:shadow-md transition-all">
+<div>
+<div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-bold mb-xs">2</div>
+<h4 class="font-headline-md text-[18px] mb-xs">Transfer $500 to ETF</h4>
+<p class="text-label-md text-on-surface-variant mb-md">Your cash balance is high. Moving this will optimize interest gains.</p>
+</div>
+<button class="w-full bg-tertiary text-on-tertiary py-xs rounded-xl font-label-md hover:opacity-90 active:scale-95 transition-all">Do it</button>
+</div>
+<!-- Action 3 -->
+<div class="bg-surface p-sm rounded-2xl border border-tertiary/20 flex flex-col justify-between hover:shadow-md transition-all">
+<div>
+<div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-bold mb-xs">3</div>
+<h4 class="font-headline-md text-[18px] mb-xs">Set Budget: Groceries</h4>
+<p class="text-label-md text-on-surface-variant mb-md">Limit to $600 to keep your savings rate at 35% next month.</p>
+</div>
+<button class="w-full bg-tertiary text-on-tertiary py-xs rounded-xl font-label-md hover:opacity-90 active:scale-95 transition-all">Do it</button>
+</div>
+</div>
+</section>
+<!-- 6. Next month forecast (Line Chart) -->
+<section class="md:col-span-12 bg-surface border border-outline-variant rounded-2xl p-md shadow-sm">
+<div class="flex justify-between items-center mb-md">
+<h2 class="text-headline-md font-headline-md">Next month forecast</h2>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-label-sm">Projected Income</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-error"></div>
+<span class="text-label-sm">Estimated Expense</span>
+</div>
+</div>
+</div>
+<div class="w-full h-64 relative bg-surface-container-lowest rounded-xl p-xs">
+<svg class="w-full h-full preserve-3d" preserveaspectratio="none" viewbox="0 0 400 100">
+<!-- Grid Lines -->
+<line stroke="#F3F4F6" stroke-width="0.5" x1="0" x2="400" y1="25" y2="25"></line>
+<line stroke="#F3F4F6" stroke-width="0.5" x1="0" x2="400" y1="50" y2="50"></line>
+<line stroke="#F3F4F6" stroke-width="0.5" x1="0" x2="400" y1="75" y2="75"></line>
+<!-- Forecast Line (Income) -->
+<path d="M0,40 Q50,30 100,35 T200,20 T300,25 T400,15" fill="none" stroke="#005c55" stroke-linecap="round" stroke-width="2"></path>
+<!-- Forecast Line (Expense) -->
+<path d="M0,70 Q50,75 100,65 T200,80 T300,70 T400,75" fill="none" stroke="#ba1a1a" stroke-dasharray="4" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+<div class="flex justify-between mt-2 text-label-sm text-on-surface-variant">
+<span>Apr 01</span>
+<span>Apr 10</span>
+<span>Apr 20</span>
+<span>Apr 30</span>
+</div>
+</div>
+<div class="mt-md p-sm bg-primary-container/10 rounded-xl flex gap-sm items-start">
+<span class="material-symbols-outlined text-primary fill-icon">lightbulb</span>
+<p class="text-body-md">AI Forecast: Based on your current trajectory, you are on track to increase your net worth by <span class="font-bold">$4,100</span> in April.</p>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Action & Nav Shell -->
+<div class="fixed bottom-0 left-0 right-0 z-50">
+<!-- Floating Primary Button -->
+<div class="flex justify-center -mb-6 relative z-10 px-md">
+<button class="bg-primary text-on-primary px-xl py-md rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center gap-2 font-headline-md text-[18px] w-full max-w-md">
+<span class="material-symbols-outlined">share</span>
+                Share report
+            </button>
+</div>
+<!-- Bottom Nav Bar -->
+<nav class="bg-surface border-t border-outline-variant shadow-lg flex justify-around items-center px-sm pb-4 pt-4">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-label-sm font-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-label-sm font-label-sm">Transactions</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-secondary-container/20 rounded-xl px-3 py-1 scale-110" href="#">
+<span class="material-symbols-outlined fill-icon">auto_awesome</span>
+<span class="text-label-sm font-label-sm">AI</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="text-label-sm font-label-sm">Plan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-sm font-label-sm">Profile</span>
+</a>
+</nav>
+</div>
+<script>
+        // Simple Interaction logic
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const icon = this.querySelector('.material-symbols-outlined');
+                if(icon) {
+                    icon.classList.add('scale-125');
+                    setTimeout(() => icon.classList.remove('scale-125'), 200);
+                }
+            });
+        });
+    </script>
+</body></html>

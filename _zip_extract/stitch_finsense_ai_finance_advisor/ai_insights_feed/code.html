@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinSense | Insights Feed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ai-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(121, 72, 227, 0.1);
+        }
+        .unread-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #6029c9;
+            border-radius: 50%;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed": "#6ffbbe",
+                      "on-primary-fixed-variant": "#00504a",
+                      "tertiary-container": "#7948e3",
+                      "primary-fixed": "#9cf2e8",
+                      "primary-container": "#0f766e",
+                      "on-error": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#005236",
+                      "surface-container-highest": "#dce2f3",
+                      "surface": "#f9f9ff",
+                      "inverse-surface": "#2a313d",
+                      "secondary-fixed-dim": "#4edea3",
+                      "surface-container-low": "#f0f3ff",
+                      "on-background": "#151c27",
+                      "inverse-primary": "#80d5cb",
+                      "surface-bright": "#f9f9ff",
+                      "on-tertiary-fixed-variant": "#5516be",
+                      "outline": "#6e7977",
+                      "primary": "#005c55",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed": "#002113",
+                      "surface-container": "#e7eefe",
+                      "secondary": "#006c49",
+                      "on-secondary-container": "#00714d",
+                      "surface-variant": "#dce2f3",
+                      "secondary-container": "#6cf8bb",
+                      "on-tertiary-container": "#f0e6ff",
+                      "error-container": "#ffdad6",
+                      "surface-container-high": "#e2e8f8",
+                      "on-tertiary": "#ffffff",
+                      "surface-tint": "#006a63",
+                      "outline-variant": "#bdc9c6",
+                      "on-primary": "#ffffff",
+                      "on-surface-variant": "#3e4947",
+                      "on-surface": "#151c27",
+                      "surface-dim": "#d3daea",
+                      "tertiary-fixed": "#e9ddff",
+                      "tertiary-fixed-dim": "#d0bcff",
+                      "error": "#ba1a1a",
+                      "background": "#f9f9ff",
+                      "on-primary-container": "#a3faef",
+                      "inverse-on-surface": "#ebf1ff",
+                      "on-secondary": "#ffffff",
+                      "tertiary": "#6029c9",
+                      "primary-fixed-dim": "#80d5cb",
+                      "on-primary-fixed": "#00201d",
+                      "on-tertiary-fixed": "#23005c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "container-max": "1280px",
+                      "xl": "64px",
+                      "xs": "8px",
+                      "sm": "16px",
+                      "gutter": "24px",
+                      "md": "24px",
+                      "lg": "40px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "body-md": ["Inter"],
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "headline-lg-mobile": ["Plus Jakarta Sans"],
+                      "body-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "label-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.25", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface overflow-x-hidden">
+<!-- Top Navigation -->
+<nav class="bg-surface sticky top-0 z-40 shadow-sm">
+<div class="flex justify-between items-center px-md py-xs w-full max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="show_chart">show_chart</span>
+                FinSense
+            </div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity" data-icon="search">search</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female executive in a modern fintech setting. She is smiling confidently, wearing a sharp charcoal blazer. The background is a blurred corporate office with floor-to-ceiling windows and soft, natural daylight, reflecting a high-trust institutional environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBggy3B_-l34zyivLxrsT6-EhULPfgP4sua5CMeUsWwlbcjlh2_Bsm7opuAhWmOIpXIG92lOFDXsVpPq-r-XcY86ibsq11tQvcoRToZOCcY8_2b11guwQWlbtJetmncLxnNmIBD4zN2hICFM7wu3kBnITxdKklcbDyzZnbQa9ViM50TFFUpa3Lgh4S2hQOUwIwOidGLEibRNLT3d3QLLeRmCpJu5lk3V1JAm_w84uvnd_f6lQc7xaCzOg"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="w-full max-w-container-max mx-auto px-md py-lg pb-32">
+<!-- Header & Filters -->
+<section id="insights-feed-view">
+<header class="mb-lg">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-md">AI Insights</h1>
+<div class="flex items-center gap-xs overflow-x-auto scrollbar-hide -mx-md px-md">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-sm py-2 rounded-full whitespace-nowrap active:scale-95 transition-transform">All</button>
+<button class="bg-surface-container text-on-surface-variant font-label-md text-label-md px-sm py-2 rounded-full whitespace-nowrap hover:bg-surface-container-high transition-colors">Alerts</button>
+<button class="bg-surface-container text-on-surface-variant font-label-md text-label-md px-sm py-2 rounded-full whitespace-nowrap hover:bg-surface-container-high transition-colors">Tips</button>
+<button class="bg-surface-container text-on-surface-variant font-label-md text-label-md px-sm py-2 rounded-full whitespace-nowrap hover:bg-surface-container-high transition-colors">Anomalies</button>
+<button class="bg-surface-container text-on-surface-variant font-label-md text-label-md px-sm py-2 rounded-full whitespace-nowrap hover:bg-surface-container-high transition-colors">Upcoming</button>
+</div>
+</header>
+<!-- Insights List -->
+<div class="space-y-md">
+<!-- Unread Anomaly Alert -->
+<div class="bg-tertiary-container/5 ai-glass rounded-xl border-l-4 border-error shadow-sm p-md relative cursor-pointer group" onclick="toggleView('detail')">
+<div class="absolute top-4 right-4">
+<div class="unread-dot"></div>
+</div>
+<div class="flex items-center gap-2 mb-xs">
+<span class="bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined !text-[14px]" data-icon="auto_awesome">auto_awesome</span>
+                            Anomaly Agent
+                        </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">2 hours ago</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-xs group-hover:text-primary transition-colors">Unusual Subscription Spike</h2>
+<p class="text-on-surface-variant font-body-md mb-sm">Your "Entertainment" spend has increased by 42% compared to your 3-month average. We've detected 3 new streaming services.</p>
+<div class="flex justify-between items-center">
+<a class="text-primary font-label-md text-label-md underline underline-offset-4 hover:opacity-80" href="#">Why am I seeing this?</a>
+<div class="flex gap-2">
+<button class="font-label-md text-label-md text-on-surface-variant hover:bg-surface-container px-sm py-2 rounded-lg transition-colors">Dismiss</button>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-sm py-2 rounded-lg hover:opacity-90 active:scale-95 transition-all">Review</button>
+</div>
+</div>
+</div>
+<!-- Moderate Tip -->
+<div class="bg-white rounded-xl border-l-4 border-tertiary-container shadow-sm p-md border border-outline-variant/30 hover:shadow-md transition-shadow">
+<div class="flex items-center gap-2 mb-xs">
+<span class="bg-tertiary-container/10 text-tertiary font-label-sm text-label-sm px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined !text-[14px]" data-icon="lightbulb">lightbulb</span>
+                            Savings Agent
+                        </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">1 day ago</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-xs">Idle Cash Optimization</h2>
+<p class="text-on-surface-variant font-body-md mb-sm">You have $4,250 sitting in your checking account earning 0.01%. Move it to your "High Yield" bucket to earn $15/mo extra.</p>
+<div class="flex justify-between items-center">
+<a class="text-primary font-label-md text-label-md underline underline-offset-4 hover:opacity-80" href="#">Why am I seeing this?</a>
+<div class="flex gap-2">
+<button class="font-label-md text-label-md text-on-surface-variant hover:bg-surface-container px-sm py-2 rounded-lg transition-colors">Dismiss</button>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-sm py-2 rounded-lg hover:opacity-90 active:scale-95 transition-all">Optimize</button>
+</div>
+</div>
+</div>
+<!-- Green Success Insight -->
+<div class="bg-white rounded-xl border-l-4 border-secondary shadow-sm p-md border border-outline-variant/30">
+<div class="flex items-center gap-2 mb-xs">
+<span class="bg-secondary-container/20 text-secondary font-label-sm text-label-sm px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined !text-[14px]" data-icon="task_alt">task_alt</span>
+                            Budget Agent
+                        </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">2 days ago</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-xs">Budget Milestone Reached</h2>
+<p class="text-on-surface-variant font-body-md mb-sm">Congratulations! You've stayed 15% under your "Dining Out" budget for the 4th consecutive week.</p>
+<div class="flex justify-between items-center">
+<a class="text-primary font-label-md text-label-md underline underline-offset-4 hover:opacity-80" href="#">Why am I seeing this?</a>
+<div class="flex gap-2">
+<button class="bg-surface-container text-on-surface-variant font-label-md text-label-md px-sm py-2 rounded-lg hover:bg-surface-container-high transition-colors">View History</button>
+</div>
+</div>
+</div>
+<!-- Amber Alert -->
+<div class="bg-white rounded-xl border-l-4 border-amber-500 shadow-sm p-md border border-outline-variant/30">
+<div class="flex items-center gap-2 mb-xs">
+<span class="bg-amber-100 text-amber-800 font-label-sm text-label-sm px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined !text-[14px]" data-icon="warning">warning</span>
+                            Risk Agent
+                        </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">3 days ago</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-xs">Subscription Renewals</h2>
+<p class="text-on-surface-variant font-body-md mb-sm">Your annual "Prime" and "Adobe Creative Cloud" subscriptions are due next week totaling $340.00.</p>
+<div class="flex justify-between items-center">
+<a class="text-primary font-label-md text-label-md underline underline-offset-4 hover:opacity-80" href="#">Why am I seeing this?</a>
+<div class="flex gap-2">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-sm py-2 rounded-lg hover:opacity-90 active:scale-95 transition-all">Fund Account</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Insight Detail View (Hidden by default) -->
+<section class="hidden" id="insight-detail-view">
+<button class="flex items-center gap-1 text-primary font-label-md mb-md hover:opacity-80" onclick="toggleView('feed')">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+                Back to Feed
+            </button>
+<header class="mb-lg">
+<div class="flex items-center justify-between mb-sm">
+<span class="bg-error-container text-on-error-container font-label-sm text-label-sm px-3 py-1 rounded-full uppercase tracking-wider font-bold">High Severity</span>
+<span class="text-on-surface-variant font-label-sm">May 12, 14:32</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Unusual Subscription Spike</h1>
+<p class="text-on-surface-variant text-body-lg">We detected a significant variance in your recurring entertainment expenses. This pattern deviates from your historical spending by 42.5%.</p>
+</header>
+<!-- Evidence List -->
+<div class="mb-lg">
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-sm">Evidence (3 Transactions)</h3>
+<div class="bg-white rounded-xl border border-outline-variant divide-y divide-outline-variant/30 overflow-hidden shadow-sm">
+<div class="flex items-center justify-between p-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="movie">movie</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Netflix Premium</p>
+<p class="text-label-sm text-on-surface-variant">Entertainment</p>
+</div>
+</div>
+<p class="font-headline-md text-error">$19.99</p>
+</div>
+<div class="flex items-center justify-between p-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="music_note">music_note</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Spotify Family</p>
+<p class="text-label-sm text-on-surface-variant">Entertainment</p>
+</div>
+</div>
+<p class="font-headline-md text-error">$16.99</p>
+</div>
+<div class="flex items-center justify-between p-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="sports_esports">sports_esports</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Xbox Game Pass</p>
+<p class="text-label-sm text-on-surface-variant">Gaming</p>
+</div>
+</div>
+<p class="font-headline-md text-error">$14.99</p>
+</div>
+</div>
+</div>
+<!-- Analysis Section -->
+<div class="mb-lg">
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-xs">What this means</h3>
+<p class="text-body-md text-on-surface mb-md">These overlapping services may indicate redundant spending. For example, your Netflix plan has increased in price while you've also added Xbox Game Pass, which includes its own streaming content.</p>
+<div class="ai-glass bg-tertiary-container/10 border-2 border-tertiary-container/30 rounded-2xl p-lg">
+<div class="flex items-start gap-4 mb-sm">
+<span class="material-symbols-outlined text-tertiary" data-icon="auto_awesome">auto_awesome</span>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-tertiary-fixed-variant">Suggested Action</h4>
+<p class="text-body-md text-on-surface-variant mt-1">Consolidate your subscriptions. Canceling Netflix for 2 months would offset the Xbox annual cost.</p>
+</div>
+</div>
+<button class="w-full bg-tertiary text-on-tertiary font-label-md py-3 rounded-xl shadow-lg hover:opacity-90 active:scale-95 transition-all">Review Subscriptions</button>
+</div>
+</div>
+<!-- Feedback -->
+<div class="flex items-center justify-center gap-md border-t border-outline-variant pt-lg">
+<p class="text-label-md text-on-surface-variant">Was this insight helpful?</p>
+<div class="flex gap-xs">
+<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="thumb_up">thumb_up</span>
+</button>
+<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="thumb_down">thumb_down</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-sm pb-4 pt-2 border-t border-outline-variant bg-surface rounded-t-xl shadow-lg md:hidden">
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-label-sm font-label-sm">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-label-sm font-label-sm">Transactions</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary bg-secondary-container/20 rounded-xl px-3 py-1">
+<span class="material-symbols-outlined" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-label-sm font-label-sm">AI</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="text-label-sm font-label-sm">Plan</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-label-sm font-label-sm">Profile</span>
+</div>
+</nav>
+<script>
+        function toggleView(view) {
+            const feed = document.getElementById('insights-feed-view');
+            const detail = document.getElementById('insight-detail-view');
+            
+            if (view === 'detail') {
+                feed.classList.add('hidden');
+                detail.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                detail.classList.add('hidden');
+                feed.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+    </script>
+</body></html>

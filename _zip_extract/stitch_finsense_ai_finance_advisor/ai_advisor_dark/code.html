@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinSense AI Advisor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#eef0ff",
+                        "inverse-primary": "#80d5cb",
+                        "surface": "#faf8ff",
+                        "primary-container": "#0f766e",
+                        "surface-container-high": "#e2e7ff",
+                        "on-background": "#131b2e",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#bdc9c6",
+                        "outline": "#6e7977",
+                        "tertiary-fixed-dim": "#d0bcff",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#00504a",
+                        "background": "#faf8ff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#e9ddff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#131b2e",
+                        "surface-container": "#eaedff",
+                        "on-secondary-container": "#00714d",
+                        "secondary": "#006c49",
+                        "on-tertiary-fixed-variant": "#5516be",
+                        "on-surface-variant": "#3e4947",
+                        "surface-bright": "#faf8ff",
+                        "on-primary-container": "#a3faef",
+                        "primary": "#005c55",
+                        "surface-variant": "#dae2fd",
+                        "on-tertiary-fixed": "#23005c",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#00201d",
+                        "on-secondary-fixed": "#002113",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#6cf8bb",
+                        "inverse-surface": "#283044",
+                        "tertiary-container": "#7948e3",
+                        "surface-dim": "#d2d9f4",
+                        "surface-container-low": "#f2f3ff",
+                        "primary-fixed-dim": "#80d5cb",
+                        "primary-fixed": "#9cf2e8",
+                        "surface-tint": "#006a63",
+                        "surface-container-highest": "#dae2fd",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#6029c9",
+                        "secondary-fixed": "#6ffbbe"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "1rem",
+                        "stack-sm": "0.5rem",
+                        "section-gap": "2rem",
+                        "container-margin": "1.25rem",
+                        "stack-lg": "1.5rem",
+                        "gutter": "1rem"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "display-financial-mobile": ["Plus Jakarta Sans"],
+                        "display-financial": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                        "display-financial-mobile": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                        "display-financial": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        
+        .ai-gradient-border {
+            position: relative;
+            background: theme('colors.inverse-surface');
+            border-radius: 20px;
+        }
+        
+        .ai-gradient-border::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: 21px;
+            padding: 1px;
+            background: linear-gradient(135deg, #7948e3, #80d5cb);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .chat-container {
+            height: calc(100vh - 128px);
+        }
+        
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.outline');
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-inverse-surface text-inverse-on-surface font-body-md transition-colors duration-300">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-inverse-surface shadow-none">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a young person with a friendly smile, shot with soft cinematic lighting. The background is a clean, minimalist financial office setting with cool slate tones. High-end photography style, extremely detailed skin textures and sharp focus on eyes, aligning with a premium corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDUkTJcOoSp9-u6n1s8tSxWLJ2KtV7ap1KQ3txF5qt79yIQSPbzcr5Y0ynvBIR3MoaZLU--inLFgmF9n8SL6xAvvdarax0emth-FDCCm4B7XxMOTftjBWl7PnCeXh4dDIWdAGTu6bjzO5R3wAKH_QvazXM39d_VgdPAv-iXkSPdqDD2uyzNua2GeY_VCAKcnH28A2Ya3KLeA3RqLjaBLA79ON3ZSLNBMM63ZZdDpJcADmxs3Fkd65fpA"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold text-primary-fixed">FinSense</h1>
+</div>
+<button class="text-inverse-primary hover:opacity-80 transition-opacity Active: scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined">auto_awesome</span>
+</button>
+</header>
+<!-- Main Canvas -->
+<main class="pt-16 pb-24 min-h-screen flex flex-col">
+<div class="flex-1 overflow-y-auto px-container-margin py-stack-lg space-y-stack-lg chat-container" id="chat-scroller">
+<!-- Welcome Message (AI) -->
+<div class="flex flex-col gap-stack-sm max-w-[85%] animate-fade-in">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="font-label-sm text-label-sm text-outline-variant">FinSense Advisor</span>
+</div>
+<div class="ai-gradient-border p-4 shadow-sm">
+<p class="text-body-md leading-relaxed">
+                        Good evening! I've analyzed your recent spending. You're actually $120 under budget this week. Would you like to see how allocating that to your "Emergency Fund" might speed up your 6-month goal?
+                    </p>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex flex-col gap-stack-sm max-w-[85%] self-end">
+<div class="bg-primary-container text-on-primary-container p-4 rounded-2xl rounded-tr-none shadow-sm">
+<p class="text-body-md">
+                        That sounds great. Can you show me a projection of how much I'll have saved by December if I continue this trend?
+                    </p>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant self-end pr-2">2:14 PM</span>
+</div>
+<!-- AI Insight Card -->
+<div class="flex flex-col gap-stack-sm max-w-[90%] animate-fade-in">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">insights</span>
+<span class="font-label-sm text-label-sm text-outline-variant">Wealth Projection</span>
+</div>
+<div class="ai-gradient-border p-5 space-y-4">
+<div class="h-32 w-full relative overflow-hidden rounded-lg bg-surface-container-highest/10">
+<!-- Projection Chart Placeholder -->
+<div class="absolute inset-0 flex items-end justify-between px-4 pb-4">
+<div class="w-8 bg-primary/40 rounded-t-sm" style="height: 30%;"></div>
+<div class="w-8 bg-primary/50 rounded-t-sm" style="height: 45%;"></div>
+<div class="w-8 bg-primary/60 rounded-t-sm" style="height: 60%;"></div>
+<div class="w-8 bg-primary/70 rounded-t-sm" style="height: 75%;"></div>
+<div class="w-8 bg-tertiary-container rounded-t-sm" style="height: 95%;"></div>
+</div>
+</div>
+<p class="text-body-md text-inverse-on-surface">
+                        Based on your current trajectory, you will reach <span class="text-secondary-fixed-dim font-semibold">$4,250</span> by December 31st. This is 12% faster than our initial estimate!
+                    </p>
+<div class="flex gap-2">
+<button class="bg-tertiary-container/20 border border-tertiary-fixed-dim/30 text-tertiary-fixed-dim px-3 py-1.5 rounded-full text-label-sm font-label-sm hover:bg-tertiary-container/40 transition-colors">
+                            Update Goal
+                        </button>
+<button class="bg-surface-variant/10 text-outline-variant px-3 py-1.5 rounded-full text-label-sm font-label-sm hover:bg-surface-variant/20 transition-colors">
+                            View Details
+                        </button>
+</div>
+</div>
+</div>
+<!-- Suggestion Chips -->
+<div class="flex flex-wrap gap-2 pt-4">
+<button class="bg-surface-container-highest/20 border border-outline-variant/30 text-outline-variant px-4 py-2 rounded-full text-label-sm font-label-sm hover:border-primary-fixed-dim transition-all">
+                    "Set a new limit for Groceries"
+                </button>
+<button class="bg-surface-container-highest/20 border border-outline-variant/30 text-outline-variant px-4 py-2 rounded-full text-label-sm font-label-sm hover:border-primary-fixed-dim transition-all">
+                    "Review last month's utilities"
+                </button>
+</div>
+</div>
+<!-- Input Area -->
+<div class="fixed bottom-20 left-0 w-full px-container-margin pb-4 bg-inverse-surface">
+<div class="flex items-center gap-3 bg-surface-container-highest/10 border border-outline-variant/20 rounded-2xl p-2 pl-4 shadow-lg backdrop-blur-md">
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-inverse-on-surface placeholder:text-outline-variant text-body-md" placeholder="Ask your financial advisor..." type="text"/>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary-container text-on-primary-container hover:opacity-90 active:scale-90 transition-all">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-6 pt-3 bg-surface-container-highest border-t border-outline">
+<button class="flex flex-col items-center justify-center text-surface-variant hover:bg-inverse-surface transition-colors">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-surface-variant hover:bg-inverse-surface transition-colors">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-sm text-label-sm">History</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 Active: scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="font-label-sm text-label-sm">AI Advisor</span>
+</button>
+<button class="flex flex-col items-center justify-center text-surface-variant hover:bg-inverse-surface transition-colors">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm">Plan</span>
+</button>
+<button class="flex flex-col items-center justify-center text-surface-variant hover:bg-inverse-surface transition-colors">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</button>
+</nav>
+<script>
+        // Micro-interaction: Auto-scroll to bottom of chat
+        const chatScroller = document.getElementById('chat-scroller');
+        chatScroller.scrollTop = chatScroller.scrollHeight;
+
+        // Pulse effect for AI indicator
+        const aiIndicator = document.querySelector('[data-icon="smart_toy"]');
+        if (aiIndicator) {
+            setInterval(() => {
+                aiIndicator.classList.add('scale-110');
+                setTimeout(() => aiIndicator.classList.remove('scale-110'), 500);
+            }, 3000);
+        }
+    </script>
+</body></html>

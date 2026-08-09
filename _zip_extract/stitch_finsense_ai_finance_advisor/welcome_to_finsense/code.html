@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinSense - Onboarding</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Design System Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "secondary-fixed": "#6ffbbe",
+                "on-primary-fixed-variant": "#00504a",
+                "tertiary-container": "#7948e3",
+                "primary-fixed": "#9cf2e8",
+                "primary-container": "#0f766e",
+                "on-error": "#ffffff",
+                "surface-container-lowest": "#ffffff",
+                "on-secondary-fixed-variant": "#005236",
+                "surface-container-highest": "#dce2f3",
+                "surface": "#f9f9ff",
+                "inverse-surface": "#2a313d",
+                "secondary-fixed-dim": "#4edea3",
+                "surface-container-low": "#f0f3ff",
+                "on-background": "#151c27",
+                "inverse-primary": "#80d5cb",
+                "surface-bright": "#f9f9ff",
+                "on-tertiary-fixed-variant": "#5516be",
+                "outline": "#6e7977",
+                "primary": "#005c55",
+                "on-error-container": "#93000a",
+                "on-secondary-fixed": "#002113",
+                "surface-container": "#e7eefe",
+                "secondary": "#006c49",
+                "on-secondary-container": "#00714d",
+                "surface-variant": "#dce2f3",
+                "secondary-container": "#6cf8bb",
+                "on-tertiary-container": "#f0e6ff",
+                "error-container": "#ffdad6",
+                "surface-container-high": "#e2e8f8",
+                "on-tertiary": "#ffffff",
+                "surface-tint": "#006a63",
+                "outline-variant": "#bdc9c6",
+                "on-primary": "#ffffff",
+                "on-surface-variant": "#3e4947",
+                "on-surface": "#151c27",
+                "surface-dim": "#d3daea",
+                "tertiary-fixed": "#e9ddff",
+                "tertiary-fixed-dim": "#d0bcff",
+                "error": "#ba1a1a",
+                "background": "#f9f9ff",
+                "on-primary-container": "#a3faef",
+                "inverse-on-surface": "#ebf1ff",
+                "on-secondary": "#ffffff",
+                "tertiary": "#6029c9",
+                "primary-fixed-dim": "#80d5cb",
+                "on-primary-fixed": "#00201d",
+                "on-tertiary-fixed": "#23005c"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "2xl": "1.25rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "base": "4px",
+                "container-max": "1280px",
+                "xl": "64px",
+                "xs": "8px",
+                "sm": "16px",
+                "gutter": "24px",
+                "md": "24px",
+                "lg": "40px"
+            },
+            "fontFamily": {
+                "display-lg": ["Plus Jakarta Sans"],
+                "body-md": ["Inter"],
+                "headline-lg": ["Plus Jakarta Sans"],
+                "headline-lg-mobile": ["Plus Jakarta Sans"],
+                "body-lg": ["Inter"],
+                "label-md": ["Inter"],
+                "headline-md": ["Plus Jakarta Sans"],
+                "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                "headline-lg": ["32px", {"lineHeight": "1.25", "fontWeight": "700"}],
+                "headline-lg-mobile": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #F8FAFC;
+            color: #151c27;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .carousel-slide {
+            flex: 0 0 100%;
+            width: 100%;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ai-sparkle-bg {
+            background: radial-gradient(circle at center, rgba(121, 72, 227, 0.05) 0%, transparent 70%);
+        }
+        .dot-active {
+            width: 24px;
+            background-color: #005c55;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md flex items-center justify-center min-h-screen overflow-hidden">
+<div class="relative w-full max-w-md mx-auto h-[90vh] bg-surface flex flex-col shadow-lg rounded-2xl overflow-hidden md:h-[800px]">
+<!-- Header: Top-right Skip Button -->
+<div class="absolute top-0 left-0 w-full p-md z-20 flex justify-end">
+<button class="font-label-md text-label-md text-outline hover:text-primary transition-colors py-2 px-4 rounded-full" onclick="window.location.reload()">
+                Skip
+            </button>
+</div>
+<!-- Carousel Container -->
+<div class="flex-grow relative overflow-hidden">
+<div class="carousel-track h-full" id="carouselTrack">
+<!-- Slide 1 -->
+<section class="carousel-slide h-full flex flex-col items-center justify-center px-lg text-center">
+<div class="relative w-full aspect-square max-w-[280px] mb-lg flex items-center justify-center">
+<div class="absolute inset-0 ai-sparkle-bg animate-pulse"></div>
+<img class="relative z-10 object-contain w-full h-full drop-shadow-xl" data-alt="A clean, minimalist 3D illustration of a premium modern smartphone floating in mid-air. Soft purple and mint green glowing sparkles and 'AI stars' orbit the device gracefully. The lighting is soft and studio-quality, emphasizing a professional Fintech aesthetic with high-trust vibes and a palette of deep teal and soft off-white." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEd0gJQd8StBircKKguoAJArAzI9SuR7-C0-HDPUf_Nk8UbSNzhCHkCFd78IxV0Iu51XAYXN_-vgQdI-wodTJ8_9WJY7DtS6pLfv2WNQoyZ7dm2NbQWNBlv2noU37rOlHMQAGjTMYvh_s2D-Py9a7OF7XVEXvLR_ZhW6FsW23a1YgnLJXFsNd7E-NXqfRop2HNfFZGdsZkPMIDRQkVKZqMmylPVdDoTilCx_lMZjggj5UdEB08NWPPpg"/>
+<div class="absolute -top-4 -right-4 bg-secondary-container/30 backdrop-blur-sm p-3 rounded-2xl shadow-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[32px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+</div>
+<div class="space-y-sm">
+<h1 class="font-headline-md text-headline-md text-on-surface leading-tight">Your money, on autopilot</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[280px] mx-auto">AI agents watch your spending 24/7 so you don't have to.</p>
+</div>
+</section>
+<!-- Slide 2 -->
+<section class="carousel-slide h-full flex flex-col items-center justify-center px-lg text-center">
+<div class="relative w-full aspect-square max-w-[280px] mb-lg flex items-center justify-center">
+<img class="relative z-10 object-contain w-full h-full" data-alt="A stylized digital illustration of various sleek bank transaction cards smoothly flying into organized geometric categories. The cards use soft gradients of teal and mint green. The background is a crisp off-white with subtle glassmorphic elements. The style is Corporate Modern, clean, and highly organized, representing effortless financial management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCidCmiLubCq7Tmit1u6iDVlylHgC7yi2DsU29aMgeSl20A5bUuFtm_UcQ9ASPeK8Jss3Y9RbbBn6rGKem-n1wz4ZTdYdHqRC-ouTxCqjGelmS6yLIfGASn_YadpeQAXm4ukaPyjEhFK5swWzodjCLuPHkCo6TuStaQr3dwRFb9jaYMWpidhV98p6NSQ7JWK_EJ9jIwr7PCKnwsGmYN2QeMoSNBehk6HzyJvB9640VT5nxNMytcnBvdwA"/>
+<div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+<div class="bg-primary/10 px-3 py-1 rounded-full text-primary font-label-sm text-[10px] border border-primary/20">Groceries</div>
+<div class="bg-secondary/10 px-3 py-1 rounded-full text-secondary font-label-sm text-[10px] border border-secondary/20">Travel</div>
+<div class="bg-tertiary/10 px-3 py-1 rounded-full text-tertiary font-label-sm text-[10px] border-tertiary/20">Rent</div>
+</div>
+</div>
+<div class="space-y-sm">
+<h1 class="font-headline-md text-headline-md text-on-surface leading-tight">Everything categorized automatically</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[280px] mx-auto">No manual entry. No spreadsheets. Ever.</p>
+</div>
+</section>
+<!-- Slide 3 -->
+<section class="carousel-slide h-full flex flex-col items-center justify-center px-lg text-center">
+<div class="relative w-full aspect-square max-w-[280px] mb-lg flex items-center justify-center">
+<div class="absolute inset-0 bg-secondary-fixed/5 rounded-full scale-110"></div>
+<img class="relative z-10 object-contain w-full h-full drop-shadow-lg" data-alt="A sophisticated UI illustration featuring a glassmorphic chat bubble containing a rising financial growth chart. The bubble is surrounded by floating UI chips showing positive alerts. The color palette uses deep teal, AI violet accents, and mint green. Professional lighting creates soft shadows, suggesting a helpful and intelligent financial assistant experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3m_QFtXQ9r8zxxb5UOMG5KF7hrKSdHwBgfvOOo_KshooTA5M29noXeU53nlwYOlZtoyKpixQo5tHd3_hurCsqjpVXJat87occpsYhABuyHkViP_njEub9s11YR6oflrYOChVevl34e1XhQjs0IbQ40_NpzXgM0yILSyj3jNM3XqIoMXSldj2vDiHThR8CK3HJgG4lzywmPahAdIkNudcEgNdiyRxEThhSPD8gJX9LzJh0ZE2l0x0Tdg"/>
+</div>
+<div class="space-y-sm">
+<h1 class="font-headline-md text-headline-md text-on-surface leading-tight">Advice before you ask</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[280px] mx-auto">Get proactive alerts and answers about your finances.</p>
+</div>
+</section>
+</div>
+</div>
+<!-- Footer: Dots and Button -->
+<div class="p-lg space-y-md">
+<!-- Page Indicators -->
+<div class="flex justify-center items-center gap-2">
+<div class="dot h-2 w-2 rounded-full bg-outline-variant transition-all duration-300 dot-active" data-index="0"></div>
+<div class="dot h-2 w-2 rounded-full bg-outline-variant transition-all duration-300" data-index="1"></div>
+<div class="dot h-2 w-2 rounded-full bg-outline-variant transition-all duration-300" data-index="2"></div>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-primary text-on-primary py-4 rounded-2xl font-label-md text-label-md shadow-md hover:bg-primary-container active:scale-95 transition-all" id="nextBtn">
+                Continue
+            </button>
+</div>
+</div>
+<script>
+        const track = document.getElementById('carouselTrack');
+        const nextBtn = document.getElementById('nextBtn');
+        const dots = document.querySelectorAll('.dot');
+        let currentSlide = 0;
+        const totalSlides = 3;
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update Dots
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('dot-active');
+                } else {
+                    dot.classList.remove('dot-active');
+                }
+            });
+
+            // Update Button Text
+            if (currentSlide === totalSlides - 1) {
+                nextBtn.textContent = 'Get Started';
+            } else {
+                nextBtn.textContent = 'Continue';
+            }
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateCarousel();
+            } else {
+                // Final Action
+                nextBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span>';
+                setTimeout(() => {
+                    alert('FinSense setup initiated! Redirecting to Dashboard...');
+                    window.location.reload();
+                }, 1000);
+            }
+        });
+
+        // Add touch support for swiping
+        let startX = 0;
+        let isDragging = false;
+
+        track.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        });
+
+        track.addEventListener('touchmove', e => {
+            if (!isDragging) return;
+            const currentX = e.touches[0].clientX;
+            const diff = startX - currentX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateCarousel();
+                    isDragging = false;
+                } else if (diff < 0 && currentSlide > 0) {
+                    currentSlide--;
+                    updateCarousel();
+                    isDragging = false;
+                }
+            }
+        });
+
+        track.addEventListener('touchend', () => isDragging = false);
+    </script>
+</body></html>

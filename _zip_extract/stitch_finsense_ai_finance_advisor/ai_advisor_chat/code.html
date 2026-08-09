@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinSense AI Advisor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ai-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(121, 72, 227, 0.15);
+        }
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-4px); }
+        }
+        .ai-gradient-text {
+            background: linear-gradient(135deg, #005c55, #6029c9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#6ffbbe",
+                    "on-primary-fixed-variant": "#00504a",
+                    "tertiary-container": "#7948e3",
+                    "primary-fixed": "#9cf2e8",
+                    "primary-container": "#0f766e",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#005236",
+                    "surface-container-highest": "#dce2f3",
+                    "surface": "#f9f9ff",
+                    "inverse-surface": "#2a313d",
+                    "secondary-fixed-dim": "#4edea3",
+                    "surface-container-low": "#f0f3ff",
+                    "on-background": "#151c27",
+                    "inverse-primary": "#80d5cb",
+                    "surface-bright": "#f9f9ff",
+                    "on-tertiary-fixed-variant": "#5516be",
+                    "outline": "#6e7977",
+                    "primary": "#005c55",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#002113",
+                    "surface-container": "#e7eefe",
+                    "secondary": "#006c49",
+                    "on-secondary-container": "#00714d",
+                    "surface-variant": "#dce2f3",
+                    "secondary-container": "#6cf8bb",
+                    "on-tertiary-container": "#f0e6ff",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e2e8f8",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#006a63",
+                    "outline-variant": "#bdc9c6",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#3e4947",
+                    "on-surface": "#151c27",
+                    "surface-dim": "#d3daea",
+                    "tertiary-fixed": "#e9ddff",
+                    "tertiary-fixed-dim": "#d0bcff",
+                    "error": "#ba1a1a",
+                    "background": "#f9f9ff",
+                    "on-primary-container": "#a3faef",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#6029c9",
+                    "primary-fixed-dim": "#80d5cb",
+                    "on-primary-fixed": "#00201d",
+                    "on-tertiary-fixed": "#23005c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "container-max": "1280px",
+                    "xl": "64px",
+                    "xs": "8px",
+                    "sm": "16px",
+                    "gutter": "24px",
+                    "md": "24px",
+                    "lg": "40px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.25", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- Header (TopAppBar) -->
+<header class="bg-surface sticky top-0 z-50 shadow-sm">
+<div class="max-w-container-max mx-auto px-md py-sm flex items-center justify-between">
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity active:scale-95">
+<span class="material-symbols-outlined text-primary" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<h1 class="text-headline-md font-headline-md font-bold text-primary">FinSense AI</h1>
+<span class="material-symbols-outlined text-tertiary text-[20px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<span class="text-label-sm font-label-sm text-outline flex items-center gap-1.5">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+</span>
+                        Analyzing 142 transactions...
+                    </span>
+</div>
+</div>
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow max-w-2xl mx-auto w-full px-md pt-lg pb-[140px] space-y-lg">
+<!-- Empty State -->
+<div class="flex flex-col items-center justify-center py-xl text-center space-y-md" id="empty-state">
+<div class="w-20 h-20 rounded-full bg-tertiary-fixed flex items-center justify-center animate-pulse shadow-lg shadow-tertiary-container/20">
+<span class="material-symbols-outlined text-tertiary text-4xl" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="space-y-xs">
+<h2 class="text-headline-md font-headline-md font-bold ai-gradient-text">Ask me anything...</h2>
+<p class="text-body-md text-on-surface-variant max-w-xs">I can help you budget, find savings, or analyze your spending trends.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-sm max-w-md pt-md" id="suggestion-buttons">
+<button class="suggestion-btn bg-surface-container-high text-label-md font-label-md px-sm py-2 rounded-full border border-outline-variant hover:border-tertiary hover:text-tertiary transition-all active:scale-95">How can I save more?</button>
+<button class="suggestion-btn bg-surface-container-high text-label-md font-label-md px-sm py-2 rounded-full border border-outline-variant hover:border-tertiary hover:text-tertiary transition-all active:scale-95">Analyze groceries spending</button>
+<button class="suggestion-btn bg-surface-container-high text-label-md font-label-md px-sm py-2 rounded-full border border-outline-variant hover:border-tertiary hover:text-tertiary transition-all active:scale-95">Set a debt goal</button>
+</div>
+</div>
+<!-- Chat Container -->
+<div class="space-y-lg hidden" id="chat-messages"></div>
+<!-- Typing Indicator -->
+<div class="flex items-start gap-sm hidden" id="typing-indicator">
+<div class="w-10 h-10 shrink-0 rounded-full bg-tertiary-fixed flex items-center justify-center border border-tertiary/10">
+<span class="material-symbols-outlined text-tertiary text-xl" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="ai-glass px-md py-sm rounded-2xl rounded-tl-none flex items-center gap-1 shadow-sm">
+<div class="w-1.5 h-1.5 bg-tertiary rounded-full typing-dot"></div>
+<div class="w-1.5 h-1.5 bg-tertiary rounded-full typing-dot"></div>
+<div class="w-1.5 h-1.5 bg-tertiary rounded-full typing-dot"></div>
+</div>
+</div>
+</main>
+<!-- Bottom Input Bar -->
+<footer class="bg-surface fixed bottom-0 left-0 w-full z-50 pt-xs pb-sm shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<div class="max-w-2xl mx-auto px-md flex items-end gap-sm">
+<div class="flex-grow relative group">
+<div class="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-none text-outline group-focus-within:text-tertiary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="sparkles" style="font-variation-settings: 'FILL' 1;">spark</span>
+</div>
+<textarea id="chat-input" class="w-full bg-surface-container-low border-none rounded-[24px] pl-12 pr-12 py-3.5 focus:ring-2 focus:ring-tertiary/20 text-body-md resize-none transition-all placeholder:text-outline" placeholder="Ask about your finances..." rows="1"></textarea>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-full text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+</div>
+<button id="send-btn" class="bg-tertiary-container text-on-tertiary-container w-12 h-12 rounded-full flex items-center justify-center shadow-md hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="send" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</footer>
+<!-- Bottom Navigation Shell (Invisible on chat focus per "Transactional/Task-Focused" rule) -->
+<!-- Navigation is suppressed here to prioritize chat canvas as per UX guidelines -->
+<script>
+        const chatMessages = document.getElementById('chat-messages');
+        const emptyState = document.getElementById('empty-state');
+        const input = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        const typingIndicator = document.getElementById('typing-indicator');
+
+        function escapeHtml(text) {
+            const d = document.createElement('div');
+            d.textContent = text;
+            return d.innerHTML;
+        }
+
+        function scrollToBottom() {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        function updateUI() {
+            const hasMessages = chatMessages.children.length > 0;
+            chatMessages.classList.toggle('hidden', !hasMessages);
+            emptyState.classList.toggle('hidden', hasMessages);
+            emptyState.classList.toggle('flex', !hasMessages);
+        }
+
+        function addUserMessage(text) {
+            const div = document.createElement('div');
+            div.className = 'flex justify-end user-message';
+            div.innerHTML = '<div class="bg-primary text-on-primary px-md py-sm rounded-2xl rounded-tr-none max-w-[85%] shadow-md"><p class="text-body-md font-body-md">' + escapeHtml(text) + '</p></div>';
+            chatMessages.appendChild(div);
+            updateUI();
+            scrollToBottom();
+        }
+
+        function addAiMessage(html) {
+            const div = document.createElement('div');
+            div.className = 'flex items-start gap-sm ai-message';
+            div.innerHTML = '<div class="w-10 h-10 shrink-0 rounded-full bg-tertiary-fixed flex items-center justify-center shadow-sm border border-tertiary/20"><span class="material-symbols-outlined text-tertiary text-xl" data-icon="auto_awesome" style="font-variation-settings: \'FILL\' 1;">auto_awesome</span></div><div class="space-y-sm max-w-[85%] w-full"><div class="ai-glass p-md rounded-2xl rounded-tl-none shadow-sm"><div class="text-body-md text-on-surface">' + html + '</div></div></div>';
+            chatMessages.appendChild(div);
+            updateUI();
+            scrollToBottom();
+        }
+
+        function showTyping() {
+            typingIndicator.classList.remove('hidden');
+            scrollToBottom();
+        }
+
+        function hideTyping() {
+            typingIndicator.classList.add('hidden');
+        }
+
+        function generateResponse(msg) {
+            const text = msg.toLowerCase();
+            if (text.includes('save') || text.includes('save more') || text.includes('saving')) {
+                return '<p>Great question! Based on your spending patterns, here are my top savings opportunities:</p><ul class="space-y-xs mt-sm" style="list-style:none;padding-left:0">' +
+                    '<li class="flex items-start gap-2"><span class="text-tertiary mt-1">•</span><span>Reduce dining out to <strong>3x/week</strong> — potential savings of <strong>$200/month</strong></span></li>' +
+                    '<li class="flex items-start gap-2"><span class="text-tertiary mt-1">•</span><span>Switch subscriptions to annual billing — save <strong>15%</strong> (~$160/year)</span></li>' +
+                    '<li class="flex items-start gap-2"><span class="text-tertiary mt-1">•</span><span>Auto-transfer <strong>$50/paycheck</strong> to savings — builds $1,300 emergency fund in 6 months</span></li></ul>' +
+                    '<p class="mt-sm">Would you like me to create a personalized savings plan for you?</p>';
+            }
+            if (text.includes('grocer')) {
+                return '<p>Here\'s your grocery spending breakdown for this month:</p>' +
+                    '<div class="flex items-center gap-md bg-surface-container-lowest/50 p-sm rounded-xl border border-outline-variant/30 mt-sm">' +
+                    '<div class="relative w-20 h-20 flex items-center justify-center">' +
+                    '<svg class="w-20 h-20 -rotate-90" viewBox="0 0 36 36">' +
+                    '<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#e7eefe" stroke-width="3"></circle>' +
+                    '<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#006c49" stroke-dasharray="55 100" stroke-width="3"></circle>' +
+                    '<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#7948e3" stroke-dasharray="25 100" stroke-dashoffset="-55" stroke-width="3"></circle>' +
+                    '<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#ba1a1a" stroke-dasharray="20 100" stroke-dashoffset="-80" stroke-width="3"></circle>' +
+                    '</svg><div class="absolute text-[10px] font-bold text-on-surface-variant">$486</div></div>' +
+                    '<div class="flex-grow space-y-1">' +
+                    '<div class="flex items-center justify-between text-label-sm"><span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary"></span> Fresh</span><span class="font-bold">55%</span></div>' +
+                    '<div class="flex items-center justify-between text-label-sm"><span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span> Pantry</span><span class="font-bold">25%</span></div>' +
+                    '<div class="flex items-center justify-between text-label-sm"><span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-error"></span> Treats</span><span class="font-bold">20%</span></div></div></div>' +
+                    '<p class="mt-sm">You\'re spending <strong>12% more</strong> on groceries vs last month. Try meal planning to cut <strong>$60/month</strong>.</p>';
+            }
+            if (text.includes('debt') || text.includes('goal')) {
+                return '<p>Let\'s build a debt payoff plan! Based on your finances:</p>' +
+                    '<div class="bg-surface-container-lowest/50 p-sm rounded-xl border border-outline-variant/30 mt-sm space-y-xs">' +
+                    '<div class="flex justify-between text-label-sm"><span>Credit Card</span><span class="font-bold text-error">$3,200</span></div>' +
+                    '<div class="flex justify-between text-label-sm"><span>Student Loan</span><span class="font-bold">$12,400</span></div>' +
+                    '<div class="flex justify-between text-label-sm"><span>Personal Loan</span><span class="font-bold text-secondary">$2,100</span></div></div>' +
+                    '<p class="mt-sm"><strong>Recommended:</strong> Use the avalanche method — pay minimums on all, then put <strong>$350/month</strong> toward your credit card (highest interest). You\'d be debt-free in <strong>18 months</strong>!</p>' +
+                    '<p class="mt-xs">Want me to set up a tracking goal for this?</p>';
+            }
+            if (text.includes('budget') || text.includes('spend') || text.includes('break down') || text.includes('month')) {
+                return '<p>I\'ve analyzed your <strong>142 transactions</strong>. Spending is down <strong>12%</strong> vs last month. Here\'s the breakdown:</p>' +
+                    '<div class="flex items-center gap-md bg-surface-container-lowest/50 p-sm rounded-xl border border-outline-variant/30 mt-sm">' +
+                    '<div class="relative w-20 h-20 flex items-center justify-center">' +
+                    '<svg class="w-20 h-20 -rotate-90" viewBox="0 0 36 36">' +
+                    '<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#e7eefe" stroke-width="3"></circle>' +
+                    '<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#7948e3" stroke-dasharray="40 100" stroke-width="3"></circle>' +
+                    '<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#006c49" stroke-dasharray="25 100" stroke-dashoffset="-40" stroke-width="3"></circle>' +
+                    '<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#ba1a1a" stroke-dasharray="35 100" stroke-dashoffset="-65" stroke-width="3"></circle>' +
+                    '</svg><div class="absolute text-[10px] font-bold text-on-surface-variant">-12%</div></div>' +
+                    '<div class="flex-grow space-y-1">' +
+                    '<div class="flex items-center justify-between text-label-sm"><span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span> Needs</span><span class="font-bold">40%</span></div>' +
+                    '<div class="flex items-center justify-between text-label-sm"><span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary"></span> Savings</span><span class="font-bold">25%</span></div>' +
+                    '<div class="flex items-center justify-between text-label-sm"><span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-error"></span> Lifestyle</span><span class="font-bold">35%</span></div></div></div>' +
+                    '<p class="mt-sm">You spent <strong>$120 less</strong> on dining out this week. Redirecting that to your Emergency Fund gets you to <strong>90% of your goal</strong>.</p>';
+            }
+            if (text.includes('income') || text.includes('earn')) {
+                return '<p>Here\'s your income overview for this month:</p>' +
+                    '<div class="bg-surface-container-lowest/50 p-sm rounded-xl border border-outline-variant/30 mt-sm space-y-xs">' +
+                    '<div class="flex justify-between text-label-sm"><span>Salary</span><span class="font-bold text-secondary">+$4,800</span></div>' +
+                    '<div class="flex justify-between text-label-sm"><span>Freelance</span><span class="font-bold text-secondary">+$650</span></div>' +
+                    '<div class="flex justify-between text-label-sm"><span>Investments</span><span class="font-bold text-secondary">+$120</span></div>' +
+                    '<hr class="border-outline-variant/50"><div class="flex justify-between text-label-sm"><span>Total</span><span class="font-bold">$5,570</span></div></div>' +
+                    '<p class="mt-sm">Your income is up <strong>8%</strong> from last month. Great growth! Consider increasing your 401(k) contribution by 1%.</p>';
+            }
+            if (text.includes('invest') || text.includes('stock') || text.includes('portfolio')) {
+                return '<p>Your investment portfolio at a glance:</p>' +
+                    '<div class="bg-surface-container-lowest/50 p-sm rounded-xl border border-outline-variant/30 mt-sm space-y-xs">' +
+                    '<div class="flex justify-between text-label-sm"><span>Stocks</span><span class="font-bold text-secondary">+8.2%</span></div>' +
+                    '<div class="flex justify-between text-label-sm"><span>Bonds</span><span class="font-bold">+2.1%</span></div>' +
+                    '<div class="flex justify-between text-label-sm"><span>ETFs</span><span class="font-bold text-secondary">+5.7%</span></div>' +
+                    '<div class="flex justify-between text-label-sm"><span>Crypto</span><span class="font-bold text-error">-3.4%</span></div></div>' +
+                    '<p class="mt-sm">Your portfolio is up <strong>4.8%</strong> overall this month. Consider rebalancing to maintain your target allocation.</p>';
+            }
+            return '<p>Great question! Here\'s what I found:</p>' +
+                '<p>Your overall financial health score is <strong>78/100</strong> — up 3 points from last month.</p>' +
+                '<ul class="space-y-xs mt-sm" style="list-style:none;padding-left:0">' +
+                '<li class="flex items-start gap-2"><span class="text-tertiary mt-1">•</span><span><strong>Emergency fund:</strong> 4.2 months of expenses — <span class="text-secondary">on track</span></span></li>' +
+                '<li class="flex items-start gap-2"><span class="text-tertiary mt-1">•</span><span><strong>Debt-to-income:</strong> 28% — <span class="text-secondary">healthy range</span></span></li>' +
+                '<li class="flex items-start gap-2"><span class="text-tertiary mt-1">•</span><span><strong>Savings rate:</strong> 22% of income — <span class="text-tertiary">above average</span></span></li></ul>' +
+                '<p class="mt-sm">What area would you like to dive deeper into? I can help with budgeting, savings, investing, or debt planning.</p>';
+        }
+
+        function sendMessage(text) {
+            if (!text.trim()) return;
+            addUserMessage(text);
+            input.value = '';
+            input.style.height = 'auto';
+            showTyping();
+            setTimeout(() => {
+                hideTyping();
+                addAiMessage(generateResponse(text));
+            }, 1200 + Math.random() * 800);
+        }
+
+        sendBtn.addEventListener('click', () => sendMessage(input.value));
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage(input.value);
+            }
+        });
+
+        input.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+
+        document.querySelectorAll('.suggestion-btn').forEach(btn => {
+            btn.addEventListener('click', () => sendMessage(btn.textContent.trim()));
+        });
+</script>
+</body></html>

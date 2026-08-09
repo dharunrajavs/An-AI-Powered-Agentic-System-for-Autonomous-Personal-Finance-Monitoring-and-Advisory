@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinSense - Profile Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "secondary-fixed": "#6ffbbe",
+        "on-primary-fixed-variant": "#00504a",
+        "tertiary-container": "#7948e3",
+        "primary-fixed": "#9cf2e8",
+        "primary-container": "#0f766e",
+        "on-error": "#ffffff",
+        "surface-container-lowest": "#ffffff",
+        "on-secondary-fixed-variant": "#005236",
+        "surface-container-highest": "#dce2f3",
+        "surface": "#f9f9ff",
+        "inverse-surface": "#2a313d",
+        "secondary-fixed-dim": "#4edea3",
+        "surface-container-low": "#f0f3ff",
+        "on-background": "#151c27",
+        "inverse-primary": "#80d5cb",
+        "surface-bright": "#f9f9ff",
+        "on-tertiary-fixed-variant": "#5516be",
+        "outline": "#6e7977",
+        "primary": "#005c55",
+        "on-error-container": "#93000a",
+        "on-secondary-fixed": "#002113",
+        "surface-container": "#e7eefe",
+        "secondary": "#006c49",
+        "on-secondary-container": "#00714d",
+        "surface-variant": "#dce2f3",
+        "secondary-container": "#6cf8bb",
+        "on-tertiary-container": "#f0e6ff",
+        "error-container": "#ffdad6",
+        "surface-container-high": "#e2e8f8",
+        "on-tertiary": "#ffffff",
+        "surface-tint": "#006a63",
+        "outline-variant": "#bdc9c6",
+        "on-primary": "#ffffff",
+        "on-surface-variant": "#3e4947",
+        "on-surface": "#151c27",
+        "surface-dim": "#d3daea",
+        "tertiary-fixed": "#e9ddff",
+        "tertiary-fixed-dim": "#d0bcff",
+        "error": "#ba1a1a",
+        "background": "#f9f9ff",
+        "on-primary-container": "#a3faef",
+        "inverse-on-surface": "#ebf1ff",
+        "on-secondary": "#ffffff",
+        "tertiary": "#6029c9",
+        "primary-fixed-dim": "#80d5cb",
+        "on-primary-fixed": "#00201d",
+        "on-tertiary-fixed": "#23005c"
+      }
+    }
+  }
+}
+</script>
+<style>
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.ai-glass { background: rgba(240, 230, 255, 0.4); backdrop-filter: blur(8px); border: 1px solid rgba(121, 72, 227, 0.2); }
+.toggle-track { width: 44px; height: 24px; background: #bdc9c6; border-radius: 999px; position: relative; cursor: pointer; transition: background 0.2s; flex-shrink: 0; }
+.toggle-track.on { background: #7948e3; }
+.toggle-track.on.bg-sec { background: #006c49; }
+.toggle-knob { width: 20px; height: 20px; background: white; border-radius: 999px; position: absolute; top: 2px; left: 2px; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+.toggle-track.on .toggle-knob { transform: translateX(20px); }
+.toast { animation: slideIn 0.25s ease; }
+@keyframes slideIn { from { transform: translateY(-16px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.field-empty { border-color: #ba1a1a !important; }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body-md">
+
+<header class="bg-surface sticky top-0 z-50 shadow-sm">
+<div class="flex items-center gap-3 px-md py-xs w-full max-w-container-max mx-auto">
+<button id="back-btn" class="p-1 -ml-1 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<div class="flex-1">
+<h1 class="text-headline-md font-headline-md font-bold text-primary">Profile Settings</h1>
+</div>
+<button id="save-btn" class="bg-primary text-on-primary px-4 py-1.5 rounded-full text-label-sm font-label-sm hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95 shadow-sm">Save</button>
+</div>
+</header>
+
+<main class="pb-32 max-w-lg mx-auto px-sm pt-md">
+
+<div id="toast" class="hidden fixed top-4 left-1/2 -translate-x-1/2 z-[60] bg-primary text-on-primary px-md py-sm rounded-xl shadow-lg text-label-sm font-label-sm toast items-center gap-2"></div>
+
+<section class="flex flex-col items-center mb-lg">
+<div class="relative mb-sm">
+<div class="w-24 h-24 rounded-full border-4 border-surface-container-high shadow-lg overflow-hidden">
+<img id="profile-preview" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3OWP7riEc9YOJH9DUtzdgIFZPLVgub3rRhAudldv_nIwoDPXQPY6QUD8ssrzU9TTqUdFRlGl_IO4skT_qkfN-byC0l-KhKkUvtj91BAzGYLyJ2hjWHj9om0Q9GxskbcweWX0crv_c1oObj7fAEMFQkJgDSWs2HDPVUlE-QN1zKw5pZwAz9LlsQoMgVEHnq3p6SJP1T1tZhGBBvbuTfcyR8qq_iAyVHbasMvmzvaO9lE00DgiBEhVt7Q"/>
+</div>
+<label class="absolute bottom-0 right-0 bg-primary text-on-primary w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+<input id="photo-input" type="file" accept="image/*" class="hidden"/>
+</label>
+</div>
+<div class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-sm font-label-sm flex items-center gap-1 mb-sm">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings:'FILL' 1">workspace_premium</span> Premium
+</div>
+</section>
+
+<section class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm mb-lg">
+<div class="px-md py-2 border-b border-outline-variant">
+<span class="text-label-sm font-label-sm text-outline uppercase tracking-wider">Personal Information</span>
+</div>
+<div class="divide-y divide-outline-variant">
+<div class="p-md">
+<label class="text-label-sm font-label-sm text-on-surface-variant mb-1 block">Full Name</label>
+<input id="full-name" value="Alex Kumar" class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-3 py-2.5 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none"/>
+</div>
+<div class="p-md">
+<label class="text-label-sm font-label-sm text-on-surface-variant mb-1 block">Email Address</label>
+<input id="email" value="alex.kumar@finsense.com" type="email" class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-3 py-2.5 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none"/>
+</div>
+<div class="p-md">
+<label class="text-label-sm font-label-sm text-on-surface-variant mb-1 block">Phone Number</label>
+<input id="phone" value="+1 (555) 123-4567" type="tel" class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-3 py-2.5 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none"/>
+</div>
+</div>
+</section>
+
+<section class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm mb-lg">
+<div class="px-md py-2 border-b border-outline-variant">
+<span class="text-label-sm font-label-sm text-outline uppercase tracking-wider">Linked Accounts</span>
+</div>
+<div class="divide-y divide-outline-variant">
+<div class="flex items-center justify-between p-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined">account_balance</span></div>
+<div><p class="text-label-md font-label-md">Chase Checking</p><p class="text-label-sm font-label-sm text-on-surface-variant">•••• 4291</p></div>
+</div>
+<span class="bg-secondary-container text-on-secondary-container text-label-sm font-label-sm px-2 py-0.5 rounded-full">Connected</span>
+</div>
+<div class="flex items-center justify-between p-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container/10 flex items-center justify-center text-tertiary"><span class="material-symbols-outlined">credit_card</span></div>
+<div><p class="text-label-md font-label-md">Chase Sapphire Credit Card</p><p class="text-label-sm font-label-sm text-on-surface-variant">•••• 8832</p></div>
+</div>
+<span class="bg-secondary-container text-on-secondary-container text-label-sm font-label-sm px-2 py-0.5 rounded-full">Connected</span>
+</div>
+<div class="flex items-center justify-between p-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/20 flex items-center justify-center text-secondary"><span class="material-symbols-outlined">savings</span></div>
+<div><p class="text-label-md font-label-md">Ally Savings</p><p class="text-label-sm font-label-sm text-on-surface-variant">•••• 7724</p></div>
+</div>
+<span class="bg-secondary-container text-on-secondary-container text-label-sm font-label-sm px-2 py-0.5 rounded-full">Connected</span>
+</div>
+<button class="w-full flex items-center justify-center gap-1 p-md text-primary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span class="text-label-sm font-label-sm">Link New Account</span>
+</button>
+</div>
+</section>
+
+<section class="ai-glass rounded-xl overflow-hidden shadow-sm mb-lg">
+<div class="px-md py-2 border-b border-tertiary-container/10">
+<span class="text-label-sm font-label-sm text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings:'FILL' 1">auto_awesome</span> AI & Automation
+</span>
+</div>
+<div class="divide-y divide-tertiary-container/10">
+<div class="flex items-center justify-between p-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container/10 flex items-center justify-center text-tertiary"><span class="material-symbols-outlined">smart_toy</span></div>
+<div><p class="text-label-md font-label-md">Agent Monitoring</p><p class="text-label-sm font-label-sm text-on-surface-variant">Analyze transactions and suggest actions</p></div>
+</div>
+<div class="toggle-track on" data-toggle="agent-toggle"><div class="toggle-knob"></div></div>
+</div>
+<div class="flex items-center justify-between p-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container/10 flex items-center justify-center text-tertiary"><span class="material-symbols-outlined">notifications_active</span></div>
+<div><p class="text-label-md font-label-md">Smart Alerts</p><p class="text-label-sm font-label-sm text-on-surface-variant">Proactive notifications for unusual activity</p></div>
+</div>
+<div class="toggle-track on" data-toggle="alerts-toggle"><div class="toggle-knob"></div></div>
+</div>
+<div class="flex items-center justify-between p-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container/10 flex items-center justify-center text-tertiary"><span class="material-symbols-outlined">auto_graph</span></div>
+<div><p class="text-label-md font-label-md">Auto-Categorization</p><p class="text-label-sm font-label-sm text-on-surface-variant">AI tags transactions automatically</p></div>
+</div>
+<div class="toggle-track on" data-toggle="auto-cat-toggle"><div class="toggle-knob"></div></div>
+</div>
+</div>
+</section>
+
+<section class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm mb-lg">
+<div class="px-md py-2 border-b border-outline-variant">
+<span class="text-label-sm font-label-sm text-outline uppercase tracking-wider">Security</span>
+</div>
+<div class="divide-y divide-outline-variant">
+<div class="flex items-center justify-between p-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/20 flex items-center justify-center text-secondary"><span class="material-symbols-outlined">fingerprint</span></div>
+<div><p class="text-label-md font-label-md">Biometric Auth</p><p class="text-label-sm font-label-sm text-on-surface-variant">FaceID / Fingerprint</p></div>
+</div>
+<div class="toggle-track on bg-sec" data-toggle="bio-toggle"><div class="toggle-knob"></div></div>
+</div>
+<div class="flex items-center justify-between p-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/20 flex items-center justify-center text-secondary"><span class="material-symbols-outlined">shield</span></div>
+<div><p class="text-label-md font-label-md">Two-Factor Authentication</p><p id="2fa-status" class="text-label-sm font-label-sm text-on-surface-variant">Status: Enabled</p></div>
+</div>
+<div class="toggle-track on bg-sec" data-toggle="2fa-toggle"><div class="toggle-knob"></div></div>
+</div>
+</div>
+</section>
+
+<section class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm mb-lg">
+<div class="px-md py-2 border-b border-outline-variant">
+<span class="text-label-sm font-label-sm text-outline uppercase tracking-wider">Data & Support</span>
+</div>
+<div class="divide-y divide-outline-variant">
+<button class="d action-btn w-full flex items-center justify-between p-md hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant"><span class="material-symbols-outlined">download</span></div>
+<div class="text-left"><p class="text-label-md font-label-md">Export My Data</p><p class="text-label-sm font-label-sm text-on-surface-variant">CSV / JSON formats</p></div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<button class="d action-btn w-full flex items-center justify-between p-md hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant"><span class="material-symbols-outlined">help_outline</span></div>
+<div class="text-left"><p class="text-label-md font-label-md">Support & Documentation</p></div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+</div>
+</section>
+
+<section class="mt-lg mb-xl flex flex-col items-center gap-sm">
+<button id="logout-btn" class="w-full py-4 px-md border-2 border-error text-error font-label-md rounded-xl hover:bg-error hover:text-on-error transition-all active:scale-95">Log Out</button>
+<p class="text-label-sm font-label-sm text-outline">App Version v1.0.0</p>
+</section>
+</main>
+
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-sm pb-4 pt-2 border-t border-outline-variant bg-surface shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-opacity" href="#"><span class="material-symbols-outlined">home</span><span class="text-label-sm font-label-sm">Home</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-opacity" href="#"><span class="material-symbols-outlined">account_balance_wallet</span><span class="text-label-sm font-label-sm">Transactions</span></a>
+<a class="bg-tertiary-container text-on-tertiary-container rounded-full p-4 -mt-8 shadow-md hover:scale-105 transition-all" href="#"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">auto_awesome</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-opacity" href="#"><span class="material-symbols-outlined">event_note</span><span class="text-label-sm font-label-sm">Plan</span></a>
+<a class="flex flex-col items-center justify-center text-primary bg-secondary-container/20 rounded-xl px-3 py-1" href="#"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">person</span><span class="text-label-sm font-label-sm">Profile</span></a>
+</nav>
+
+<script>
+(function() {
+  var toast = document.getElementById('toast');
+  var toastTimer;
+
+  window.showToast = function(msg) {
+    toast.textContent = msg;
+    toast.className = 'flex fixed top-4 left-1/2 -translate-x-1/2 z-[60] bg-primary text-on-primary px-md py-sm rounded-xl shadow-lg text-label-sm font-label-sm toast items-center gap-2';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() { toast.className = 'hidden'; }, 2500);
+  };
+
+  function $(id) { return document.getElementById(id); }
+
+  $('save-btn').onclick = function() {
+    var valid = true;
+    ['full-name', 'email', 'phone'].forEach(function(id) {
+      var el = $(id);
+      if (!el.value.trim()) { el.classList.add('field-empty'); valid = false; }
+      else el.classList.remove('field-empty');
+    });
+    if (!valid) { showToast('Please fill in all required fields.'); return; }
+    showToast('Profile saved successfully!');
+  };
+
+  $('photo-input').onchange = function(e) {
+    var file = e.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev) { $('profile-preview').src = ev.target.result; showToast('Profile photo updated.'); };
+    reader.readAsDataURL(file);
+  };
+
+  $('back-btn').onclick = function() { showToast('Navigating back...'); };
+  $('logout-btn').onclick = function() { showToast('Logging out...'); };
+
+  document.querySelectorAll('.action-btn').forEach(function(btn) {
+    btn.onclick = function() { showToast(this.textContent.trim().includes('Export') ? 'Your data export has been prepared for download.' : 'Opening support center...'); };
+  });
+
+  document.querySelectorAll('.toggle-track').forEach(function(track) {
+    track.onclick = function() {
+      var isOn = this.classList.toggle('on');
+      if (this.dataset.toggle === '2fa-toggle') {
+        $('2fa-status').textContent = 'Status: ' + (isOn ? 'Enabled' : 'Disabled');
+      }
+    };
+  });
+
+  document.querySelectorAll('button').forEach(function(el) {
+    el.addEventListener('mousedown', function() { this.classList.add('scale-95'); });
+    el.addEventListener('mouseup', function() { this.classList.remove('scale-95'); });
+    el.addEventListener('mouseleave', function() { this.classList.remove('scale-95'); });
+  });
+})();
+</script>
+</body></html>

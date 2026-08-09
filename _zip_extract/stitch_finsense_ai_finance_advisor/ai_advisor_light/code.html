@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinSense AI Advisor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#eef0ff",
+                    "inverse-primary": "#80d5cb",
+                    "surface": "#faf8ff",
+                    "primary-container": "#0f766e",
+                    "surface-container-high": "#e2e7ff",
+                    "on-background": "#131b2e",
+                    "on-error": "#ffffff",
+                    "outline-variant": "#bdc9c6",
+                    "outline": "#6e7977",
+                    "tertiary-fixed-dim": "#d0bcff",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#00504a",
+                    "background": "#faf8ff",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#e9ddff",
+                    "on-secondary-fixed-variant": "#005236",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#131b2e",
+                    "surface-container": "#eaedff",
+                    "on-secondary-container": "#00714d",
+                    "secondary": "#006c49",
+                    "on-tertiary-fixed-variant": "#5516be",
+                    "on-surface-variant": "#3e4947",
+                    "surface-bright": "#faf8ff",
+                    "on-primary-container": "#a3faef",
+                    "primary": "#005c55",
+                    "surface-variant": "#dae2fd",
+                    "on-tertiary-fixed": "#23005c",
+                    "surface-variant-light": "#dae2fd",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#00201d",
+                    "on-secondary-fixed": "#002113",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#6cf8bb",
+                    "inverse-surface": "#283044",
+                    "tertiary-container": "#7948e3",
+                    "surface-dim": "#d2d9f4",
+                    "surface-container-low": "#f2f3ff",
+                    "primary-fixed-dim": "#80d5cb",
+                    "on-tertiary-container": "#f0e6ff",
+                    "primary-fixed": "#9cf2e8",
+                    "surface-tint": "#006a63",
+                    "surface-container-highest": "#dae2fd",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#6029c9",
+                    "secondary-fixed": "#6ffbbe"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "1rem",
+                    "stack-sm": "0.5rem",
+                    "section-gap": "2rem",
+                    "container-margin": "1.25rem",
+                    "stack-lg": "1.5rem",
+                    "gutter": "1rem"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "display-financial-mobile": ["Plus Jakarta Sans"],
+                    "display-financial": ["Plus Jakarta Sans"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "display-financial-mobile": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                    "display-financial": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        .ai-gradient-border {
+            position: relative;
+            background: #ffffff;
+            border-radius: 20px;
+        }
+        .ai-gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 21px;
+            padding: 1px;
+            background: linear-gradient(135deg, #6029c9, #0f766e, #80d5cb);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24 pt-16">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a young man named Alex, wearing a neutral-colored casual shirt. The background is a soft, blurred office interior with warm, natural sunlight. The image has a clean, high-end photography style with a focus on friendly and reliable financial personality, matching a professional light-mode UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkUNzxtG5RxYF8g2aubfjMMUswVSaK9eGaeZYkKDoEQO5fGxejwAdgaj6qHrgi59Gw4RNv9FEvkrPS6rKMrvLXD2f8_E6DNXA-9x3Ujaw6sq6V_9OYWmzYj0TiRl7UeXjHjGLJG2Ia7gt1fp5ISYM3b472yOK98ecPT8fWOGMcy-zfn2tTT0D8e0yvq008C2bVG32AiVSyYTgQVh9buTnx1J1WkrbzQL4cLKW4sEFcFmQSxcgvBmuxtw"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold text-primary">FinSense</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-primary hover:opacity-80 transition-opacity active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</button>
+</header>
+<!-- Main Content: AI Advisor Chat Canvas -->
+<main class="max-w-3xl mx-auto px-container-margin flex flex-col gap-stack-lg mt-8">
+<!-- Header Section -->
+<section class="flex flex-col items-center text-center space-y-2 py-4">
+<div class="w-16 h-16 rounded-full bg-gradient-to-tr from-tertiary to-primary flex items-center justify-center shadow-lg mb-2">
+<span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">FinSense AI Advisor</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant px-8">Your personal financial intelligence, ready to help you save and grow.</p>
+</section>
+<!-- Chat History -->
+<div class="flex flex-col gap-6">
+<!-- AI Message -->
+<div class="flex flex-col gap-2 max-w-[85%] self-start group">
+<div class="ai-gradient-border p-4 shadow-sm">
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+                        Hi Alex! Based on your recent spending at <span class="font-semibold text-primary">'The Coffee House'</span>, you've reached 80% of your <span class="font-semibold text-secondary">'Dining Out'</span> budget. Want me to help you find a cheaper alternative for the weekend?
+                    </p>
+</div>
+<!-- Progress Visualization inside message -->
+<div class="px-1">
+<div class="flex justify-between mb-1">
+<span class="text-[11px] font-medium text-on-surface-variant">Budget Progress</span>
+<span class="text-[11px] font-medium text-error">80% used</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-gradient-to-r from-secondary to-error h-full rounded-full" style="width: 80%"></div>
+</div>
+</div>
+</div>
+<!-- User Suggested Replies -->
+<div class="flex flex-wrap gap-2 justify-end mt-4">
+<button class="px-4 py-2 rounded-full border border-outline-variant text-primary font-label-sm text-label-sm hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95">
+                    Yes, please!
+                </button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-primary font-label-sm text-label-sm hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95">
+                    Show budget details
+                </button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-primary font-label-sm text-label-sm hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95">
+                    I'm okay
+                </button>
+</div>
+<!-- Optional: AI Insight Bento Card -->
+<div class="ai-gradient-border overflow-hidden shadow-md mt-4">
+<div class="p-4 flex gap-4 items-start">
+<div class="p-2 rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined" data-icon="lightbulb">lightbulb</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary mb-1">Weekend Saving Tip</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Switching your morning latte for a home brew this weekend could save you approximately <span class="font-bold text-primary">$18.50</span>.</p>
+</div>
+</div>
+<div class="bg-surface-variant-light/30 h-32 relative">
+<div class="absolute inset-0 flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A minimalist data visualization showing a bar chart with soft teal and violet gradients. One bar representing 'Home Brew' is much smaller than 'Coffee House' spending, visually illustrating potential savings. The background is clean white with subtle grid lines, maintaining a high-end financial dashboard aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBurgXAmxzheJU5cPnxxsA3Rl0BqTtvxslBNzHiXErmbD5bw_D3hdYvIEIzDsA7DexcyFif9MvpD4CovhikFRrL06LMEdy3iWbhFC07Mh7zoVEf_QhN25WeboTGYlFHQi__ufo_s6GoYxmzbw7gqeI5tTJccLC9iPs68lNRJTw7YFTt92un066jcWXZWnoBdp9phGMGzZ3H4UhC4l0F8VezYWN1JAIiCg61rDV-gnpEIc7lAiWD40r73w"/>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Chat Input Floating Area -->
+<div class="fixed bottom-20 left-0 w-full px-container-margin z-40">
+<div class="max-w-3xl mx-auto glass-morphism rounded-2xl border border-outline-variant shadow-xl p-2 flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+</button>
+<input class="flex-grow bg-transparent border-none focus:ring-0 text-on-surface font-body-md placeholder:text-outline" placeholder="Ask anything..." type="text"/>
+<button class="w-10 h-10 rounded-xl bg-gradient-to-tr from-tertiary to-primary text-white flex items-center justify-center hover:shadow-lg transition-shadow active:scale-95">
+<span class="material-symbols-outlined" data-icon="sparkles" style="font-variation-settings: 'FILL' 1;">spark</span>
+</button>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-6 pt-3 bg-surface-container rounded-t-xl shadow-lg border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors rounded-xl px-2 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors rounded-xl px-2 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-sm text-label-sm mt-1">History</span>
+</a>
+<!-- Active Tab -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="font-label-sm text-label-sm mt-1">AI Advisor</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors rounded-xl px-2 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm mt-1">Plan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors rounded-xl px-2 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for suggested replies
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(this.innerText.includes('?')) return; // skip if it's a non-reply button
+                const text = this.innerText;
+                // Imagine adding message to UI here
+                console.log("Selected response:", text);
+            });
+        });
+
+        // Add visual flare to input on focus
+        const chatInput = document.querySelector('input');
+        const glassBox = chatInput?.parentElement;
+        chatInput?.addEventListener('focus', () => {
+            glassBox.classList.add('border-primary');
+            glassBox.classList.remove('border-outline-variant');
+        });
+        chatInput?.addEventListener('blur', () => {
+            glassBox.classList.remove('border-primary');
+            glassBox.classList.add('border-outline-variant');
+        });
+    </script>
+</body></html>

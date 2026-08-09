@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinSense - Profile Setup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#6ffbbe",
+                        "on-primary-fixed-variant": "#00504a",
+                        "tertiary-container": "#7948e3",
+                        "primary-fixed": "#9cf2e8",
+                        "primary-container": "#0f766e",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container-highest": "#dce2f3",
+                        "surface": "#f9f9ff",
+                        "inverse-surface": "#2a313d",
+                        "secondary-fixed-dim": "#4edea3",
+                        "surface-container-low": "#f0f3ff",
+                        "on-background": "#151c27",
+                        "inverse-primary": "#80d5cb",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-fixed-variant": "#5516be",
+                        "outline": "#6e7977",
+                        "primary": "#005c55",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#002113",
+                        "surface-container": "#e7eefe",
+                        "secondary": "#006c49",
+                        "on-secondary-container": "#00714d",
+                        "surface-variant": "#dce2f3",
+                        "secondary-container": "#6cf8bb",
+                        "on-tertiary-container": "#f0e6ff",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e2e8f8",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#006a63",
+                        "outline-variant": "#bdc9c6",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#3e4947",
+                        "on-surface": "#151c27",
+                        "surface-dim": "#d3daea",
+                        "tertiary-fixed": "#e9ddff",
+                        "tertiary-fixed-dim": "#d0bcff",
+                        "error": "#ba1a1a",
+                        "background": "#f9f9ff",
+                        "on-primary-container": "#a3faef",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#6029c9",
+                        "primary-fixed-dim": "#80d5cb",
+                        "on-primary-fixed": "#00201d",
+                        "on-tertiary-fixed": "#23005c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "container-max": "1280px",
+                        "xl": "64px",
+                        "xs": "8px",
+                        "sm": "16px",
+                        "gutter": "24px",
+                        "md": "24px",
+                        "lg": "40px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.25", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #f9f9ff;
+            font-family: 'Inter', sans-serif;
+        }
+        .ai-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(121, 72, 227, 0.1);
+        }
+        .step-transition {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .chip-active {
+            background-color: #005c55;
+            color: #ffffff;
+            border-color: #005c55;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="text-on-surface antialiased overflow-x-hidden">
+<!-- Top Navigation / Shell -->
+<header class="bg-surface dark:bg-on-background shadow-sm dark:shadow-none sticky top-0 z-50">
+<div class="flex justify-between items-center px-md py-xs w-full max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">show_chart</span>
+<span>FinSense</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+</div>
+</header>
+<main class="min-h-[calc(100vh-64px)] flex flex-col items-center pt-lg px-sm md:px-lg pb-xl max-w-2xl mx-auto">
+<!-- Progress Bar Section -->
+<div class="w-full mb-lg space-y-3">
+<div class="flex justify-between items-end">
+<span class="text-label-md font-label-md text-primary">Step 1 of 3</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">33% Complete</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-1000 ease-out" style="width: 33%"></div>
+</div>
+</div>
+<!-- Heading Section -->
+<div class="w-full mb-lg text-center md:text-left">
+<h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-on-surface mb-2">Tell us about you</h1>
+<p class="text-body-md font-body-md text-on-surface-variant">This helps our AI personalize your financial dashboard and insights.</p>
+</div>
+<!-- Main Card Form -->
+<div class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-md md:p-lg shadow-sm space-y-lg step-transition">
+<!-- Currency Selector -->
+<div class="space-y-sm">
+<label class="text-label-md font-label-md text-on-surface-variant">Primary Currency</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-low border-none rounded-xl py-3 px-4 pr-10 text-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary cursor-pointer transition-all">
+<option value="USD">🇺🇸 USD - US Dollar</option>
+<option value="EUR">🇪🇺 EUR - Euro</option>
+<option value="GBP">🇬🇧 GBP - British Pound</option>
+<option value="JPY">🇯🇵 JPY - Japanese Yen</option>
+<option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Monthly Income -->
+<div class="space-y-sm">
+<label class="text-label-md font-label-md text-on-surface-variant">Average Monthly Income</label>
+<div class="relative group">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-headline-md font-headline-md text-primary opacity-50 group-focus-within:opacity-100 transition-opacity">$</span>
+<input class="w-full bg-surface-container-low border-none rounded-xl py-5 pl-10 pr-4 text-headline-md font-headline-md text-on-surface focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline-variant" placeholder="0.00" type="number"/>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant/70 italic">Estimate based on your last 3 months</p>
+</div>
+<!-- Primary Goal (Chips) -->
+<div class="space-y-sm">
+<label class="text-label-md font-label-md text-on-surface-variant">What's your primary goal?</label>
+<div class="flex flex-wrap gap-3" id="goal-container">
+<button class="px-4 py-2 rounded-full border border-outline-variant text-label-md font-label-md text-on-surface-variant hover:border-primary/50 transition-all cursor-pointer" onclick="toggleChip(this)" type="button">Save more</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-label-md font-label-md text-on-surface-variant hover:border-primary/50 transition-all cursor-pointer" onclick="toggleChip(this)" type="button">Reduce debt</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-label-md font-label-md text-on-surface-variant hover:border-primary/50 transition-all cursor-pointer" onclick="toggleChip(this)" type="button">Track spending</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-label-md font-label-md text-on-surface-variant hover:border-primary/50 transition-all cursor-pointer" onclick="toggleChip(this)" type="button">Build emergency fund</button>
+</div>
+</div>
+</div>
+<!-- AI Insight Subtle Hint -->
+<div class="w-full mt-gutter">
+<div class="ai-glass rounded-xl p-sm flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<p class="text-label-sm font-label-sm text-on-surface-variant">
+<span class="text-tertiary font-bold">Smart Sync:</span> Connecting your details now allows our AI to forecast your savings growth with 94% accuracy.
+                </p>
+</div>
+</div>
+<!-- Continue Button -->
+<div class="w-full mt-xl flex flex-col gap-gutter">
+<button class="w-full bg-primary text-on-primary py-4 rounded-full font-label-md text-body-lg shadow-md hover:opacity-90 active:scale-95 transition-all flex justify-center items-center gap-2">
+                Continue
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<div class="flex justify-center gap-8">
+<button class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors">Skip for now</button>
+</div>
+</div>
+<!-- Atmospheric Image -->
+<div class="mt-xl w-full rounded-2xl overflow-hidden shadow-sm aspect-video relative group">
+<img class="w-full h-full object-cover" data-alt="A clean, minimalist high-trust fintech background featuring blurred gradients of soft teal and deep navy. In the foreground, a stylish workspace with a sleek laptop and organized financial charts is visible, suggesting clarity and professional control. The lighting is bright and high-key, creating an atmosphere of institutional stability and forward-thinking modern intelligence. The composition is spacious and serene, avoiding clutter to reflect the brand's transparent and empowering personality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACy4vdn0CCdyyFz_bke9ov1GTHWIpjOOEZXMiVGXxwNXA7b0HFygRjQO2Q8tPosEruKWxYiPKtWXUKMKzWHH7MW2q1uFuPWkpOjFYfMcvssIz2Dt_XYqs8x5sDaH231nr6ukrMhuiX3Qq1l8Igu5oYOr3ir9uGkDhZ1-o-jlYFMQYgiQ3hAacdk8hnNmgnVDcCooM8DuKmELbCtDSx8-1LvwFqYppLTl8AsYvvBmVnvIMq-kcFF1PgaA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+</div>
+</main>
+<!-- Script for Interactions -->
+<script>
+        function toggleChip(element) {
+            // Check if already active
+            const isActive = element.classList.contains('chip-active');
+            
+            // Remove active class from all chips in the container
+            const container = element.parentElement;
+            container.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('chip-active', 'bg-primary', 'text-white', 'border-primary');
+                btn.classList.add('border-outline-variant', 'text-on-surface-variant');
+            });
+
+            // Toggle active state for current chip if it wasn't active
+            if (!isActive) {
+                element.classList.add('chip-active', 'bg-primary', 'text-white', 'border-primary');
+                element.classList.remove('border-outline-variant', 'text-on-surface-variant');
+                
+                // Add a small bounce effect
+                element.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    element.style.transform = 'scale(1)';
+                }, 100);
+            }
+        }
+
+        // Add input animation for the number field
+        const incomeInput = document.querySelector('input[type="number"]');
+        incomeInput.addEventListener('focus', () => {
+            incomeInput.parentElement.classList.add('ring-2', 'ring-primary/20');
+        });
+        incomeInput.addEventListener('blur', () => {
+            incomeInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
+        });
+    </script>
+</body></html>

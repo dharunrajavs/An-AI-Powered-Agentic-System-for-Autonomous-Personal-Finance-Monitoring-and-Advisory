@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinSense - Transactions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-ai {
+            background: rgba(240, 230, 255, 0.4);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(121, 72, 227, 0.2);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .sticky-header {
+            position: sticky;
+            top: 64px; /* Height of TopAppBar roughly */
+            z-index: 30;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#6ffbbe",
+                        "on-primary-fixed-variant": "#00504a",
+                        "tertiary-container": "#7948e3",
+                        "primary-fixed": "#9cf2e8",
+                        "primary-container": "#0f766e",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container-highest": "#dce2f3",
+                        "surface": "#f9f9ff",
+                        "inverse-surface": "#2a313d",
+                        "secondary-fixed-dim": "#4edea3",
+                        "surface-container-low": "#f0f3ff",
+                        "on-background": "#151c27",
+                        "inverse-primary": "#80d5cb",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-fixed-variant": "#5516be",
+                        "outline": "#6e7977",
+                        "primary": "#005c55",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#002113",
+                        "surface-container": "#e7eefe",
+                        "secondary": "#006c49",
+                        "on-secondary-container": "#00714d",
+                        "surface-variant": "#dce2f3",
+                        "secondary-container": "#6cf8bb",
+                        "on-tertiary-container": "#f0e6ff",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e2e8f8",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#006a63",
+                        "outline-variant": "#bdc9c6",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#3e4947",
+                        "on-surface": "#151c27",
+                        "surface-dim": "#d3daea",
+                        "tertiary-fixed": "#e9ddff",
+                        "tertiary-fixed-dim": "#d0bcff",
+                        "error": "#ba1a1a",
+                        "background": "#f9f9ff",
+                        "on-primary-container": "#a3faef",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#6029c9",
+                        "primary-fixed-dim": "#80d5cb",
+                        "on-primary-fixed": "#00201d",
+                        "on-tertiary-fixed": "#23005c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "container-max": "1280px",
+                        "xl": "64px",
+                        "xs": "8px",
+                        "sm": "16px",
+                        "gutter": "24px",
+                        "md": "24px",
+                        "lg": "40px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.25", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-surface sticky top-0 z-50 shadow-sm">
+<div class="flex justify-between items-center px-md py-xs w-full max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="show_chart">show_chart</span>
+<span>FinSense</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a friendly user for a fintech application profile. The lighting is warm and natural, set in a modern office background with soft bokeh. The style is clean, corporate modern, and high-trust, matching a sophisticated teal and violet color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOXgWkOkSAqcgufuVvwi-96rpuxQoneSqs_UEOHMP9XDF0JJtulKvdbEpGm4THmYjvx_WbOYfaeriXv1kuNN8ueo5MlFIeD1egtgbSIsWN0HGN58hU0yX58wbi_J1U3gbTT1UAZTlJVIrLAdGDmvO_aCP3TfT9UhFnUUna6k_camF4ZFUZk3HHfl2N0DWHZs2siIJzXCUkkuH448S4P0yQ9p35LjRL9_-z_ejBYxZKv9S07zc1XtmZsg"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-md md:px-lg pt-sm">
+<!-- Page Header -->
+<section class="mb-md">
+<h1 class="text-headline-lg font-headline-lg mb-xs">Transactions</h1>
+<div class="flex items-center justify-between text-on-surface-variant bg-surface-container-low p-sm rounded-xl border border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="analytics">analytics</span>
+<p class="font-label-md text-label-md">142 transactions · <span class="text-on-surface font-bold">$2,840 spent</span></p>
+</div>
+<button class="text-primary font-label-md hover:underline">View Insights</button>
+</div>
+</section>
+<!-- Category Chips -->
+<div class="flex gap-2 overflow-x-auto hide-scrollbar pb-md mb-xs -mx-md px-md md:mx-0 md:px-0">
+<button class="px-sm py-2 rounded-full bg-primary text-on-primary font-label-md whitespace-nowrap shadow-md">All</button>
+<button class="px-sm py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md whitespace-nowrap hover:bg-surface-container-high transition-colors">This Month</button>
+<button class="px-sm py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md whitespace-nowrap hover:bg-surface-container-high transition-colors">Food & Dining</button>
+<button class="px-sm py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md whitespace-nowrap hover:bg-surface-container-high transition-colors">Shopping</button>
+<button class="px-sm py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md whitespace-nowrap hover:bg-surface-container-high transition-colors">Transport</button>
+<button class="px-sm py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md whitespace-nowrap hover:bg-surface-container-high transition-colors">Entertainment</button>
+</div>
+<!-- Transactions List -->
+<div class="space-y-gutter">
+<!-- Group: Today -->
+<div>
+<div class="bg-background/80 backdrop-blur-md py-2 sticky top-[64px] z-20 border-b border-outline-variant/20 mb-sm">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Today</h2>
+</div>
+<div class="space-y-sm">
+<!-- Row 1: Normal -->
+<div class="bg-surface p-md rounded-xl shadow-sm hover:shadow-md transition-all flex items-center justify-between border border-outline-variant/30 group">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+</div>
+<div>
+<h3 class="font-label-md text-on-surface">Starbucks Reserve</h3>
+<div class="flex items-center gap-2">
+<p class="text-label-sm text-on-surface-variant">Food & Drink</p>
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-tertiary-container/10 text-tertiary text-[10px] font-bold border border-tertiary-container/20">
+<span class="material-symbols-outlined !text-[10px]" data-icon="auto_awesome">auto_awesome</span>
+                                        AI
+                                    </span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="text-error font-bold">-$12.45</p>
+<p class="text-label-sm text-on-surface-variant">2:45 PM</p>
+</div>
+</div>
+<!-- Row 2: Anomaly Border -->
+<div class="bg-surface p-md rounded-xl shadow-sm hover:shadow-md transition-all flex items-center justify-between border-l-4 border-l-[#ffb300] border border-outline-variant/30">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<div>
+<h3 class="font-label-md text-on-surface">Amazon Marketplace</h3>
+<p class="text-label-sm text-on-surface-variant">Shopping</p>
+<p class="text-[10px] text-[#b48000] font-bold mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined !text-[12px]" data-icon="warning">warning</span>
+                                    Higher than usual for this category
+                                </p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-error font-bold">-$249.99</p>
+<p class="text-label-sm text-on-surface-variant">11:20 AM</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Group: Yesterday -->
+<div>
+<div class="bg-background/80 backdrop-blur-md py-2 sticky top-[64px] z-20 border-b border-outline-variant/20 mb-sm">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Yesterday</h2>
+</div>
+<div class="space-y-sm">
+<!-- Row 3: Income -->
+<div class="bg-surface p-md rounded-xl shadow-sm hover:shadow-md transition-all flex items-center justify-between border border-outline-variant/30">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl bg-secondary-container/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<div>
+<h3 class="font-label-md text-on-surface">Salary Deposit</h3>
+<p class="text-label-sm text-on-surface-variant">Income</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-secondary font-bold">+$4,250.00</p>
+<p class="text-label-sm text-on-surface-variant">Sept 21</p>
+</div>
+</div>
+<!-- Row 4: Normal -->
+<div class="bg-surface p-md rounded-xl shadow-sm hover:shadow-md transition-all flex items-center justify-between border border-outline-variant/30">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+</div>
+<div>
+<h3 class="font-label-md text-on-surface">Uber Trip</h3>
+<div class="flex items-center gap-2">
+<p class="text-label-sm text-on-surface-variant">Transport</p>
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-tertiary-container/10 text-tertiary text-[10px] font-bold border border-tertiary-container/20">
+<span class="material-symbols-outlined !text-[10px]" data-icon="auto_awesome">auto_awesome</span>
+                                        AI
+                                    </span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="text-error font-bold">-$18.40</p>
+<p class="text-label-sm text-on-surface-variant">7:15 PM</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State Preview (Hidden usually, but here for the requirement) -->
+<div class="hidden flex flex-col items-center justify-center py-xl text-center space-y-md" id="empty-state">
+<div class="w-48 h-48 rounded-full bg-surface-container-low flex items-center justify-center">
+<img class="w-40 h-40 object-contain opacity-80" data-alt="A friendly, minimalist illustration showing a person searching through clear folders in a clean, modern digital workspace. The style is institutional yet approachable, using a soft palette of muted teals, greys, and pale violet. It conveys clarity and an invitation to get organized without feeling overwhelming." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN7xDhwPcSwkUlYVhMnPHPeownDvNOoKACfwguQPYRGMm1rp430lcOklqi75R0aW1krsDLzI-n4LFc140M51DTWqlG5pE94NXziA_-u57u4_Rqj6dq1Wo7CYzbEuG63L7bTkDAyfYk4RnVYx3FtTg_LLryzr8cN3vO8kfUzlg0-NqdCJsLBR1dBB68AqGgMKhGkATJypfZA5T3XGKjlWglu7_PW5MO_okvPAH7YoWPJJGAKubXvTIZ8g"/>
+</div>
+<div class="max-w-xs">
+<h3 class="text-headline-md font-headline-md text-on-surface">No transactions yet</h3>
+<p class="text-body-md text-on-surface-variant mt-2">Link your bank account or add a transaction manually to see your financial story unfold.</p>
+<button class="mt-md px-lg py-3 bg-primary text-on-primary rounded-full font-label-md shadow-lg hover:opacity-90 transition-opacity">Add Transaction</button>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-105 active:scale-95 transition-transform z-50">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-sm pb-4 pt-2 border-t border-outline-variant bg-surface shadow-lg">
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-label-sm font-label-sm mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary bg-secondary-container/20 rounded-xl px-3 py-1">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="text-label-sm font-label-sm mt-1">Transactions</span>
+</button>
+<button class="bg-tertiary-container text-on-tertiary-container rounded-full p-4 -mt-8 shadow-md hover:scale-105 transition-all">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="text-label-sm font-label-sm mt-1">Plan</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-label-sm font-label-sm mt-1">Profile</span>
+</button>
+</nav>
+<script>
+        // Simple interactivity for demonstration
+        document.querySelectorAll('.group').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.add('scale-[0.98]');
+                setTimeout(() => item.classList.remove('scale-[0.98]'), 100);
+            });
+        });
+
+        // Mock empty state toggler (for designer view)
+        window.toggleEmptyState = function() {
+            const list = document.querySelector('.space-y-gutter');
+            const empty = document.getElementById('empty-state');
+            if (empty.classList.contains('hidden')) {
+                list.children[0].classList.add('hidden');
+                list.children[1].classList.add('hidden');
+                empty.classList.remove('hidden');
+            } else {
+                list.children[0].classList.remove('hidden');
+                list.children[1].classList.remove('hidden');
+                empty.classList.add('hidden');
+            }
+        }
+    </script>
+</body></html>
