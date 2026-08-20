@@ -2,7 +2,13 @@ import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { useSendChatMessage } from '../../hooks';
 
-const PROMPTS = ['Why did my spending spike?', 'Am I on track for retirement?', 'Summarize last month'];
+const PROMPTS = [
+  'Where should I invest?',
+  'How much can I invest monthly?',
+  'Why did my spending spike?',
+  'Am I on track for retirement?',
+  'Summarize last month',
+];
 
 export function SuggestedPromptChips() {
   const sendMessage = useSendChatMessage();

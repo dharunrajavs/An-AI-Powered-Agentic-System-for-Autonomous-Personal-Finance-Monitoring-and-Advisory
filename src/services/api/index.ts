@@ -597,6 +597,26 @@ function buildContextualResponse(query: string, transactions: Transaction[], bud
     return `I don't see unusual spending patterns. Your ${budgets.length} budgets are mostly on track.`;
   }
 
+  if (q.includes('invest') || q.includes('sip') || q.includes('mutual fund') || q.includes('fd') || q.includes('ppf') || q.includes('nps') || q.includes('where to put')) {
+    const totalIncome = transactions.filter((t) => t.amount > 0).reduce((s, t) => s + t.amount, 0);
+    const totalSpent = transactions.filter((t) => t.amount < 0).reduce((s, t) => s + Math.abs(t.amount), 0);
+    const surplus = Math.max(0, totalIncome - totalSpent);
+    const monthlySurplus = Math.round(surplus / 2); // rough monthly estimate if period spans ~2 months
+
+    const hasLongTermGoal = goals.some((g) => g.targetDate && new Date(g.targetDate).getFullYear() - new Date().getFullYear() >= 3);
+    let suggestion: string;
+    if (q.includes('retirement')) {
+      suggestion = `For retirement, start a monthly SIP into an index fund, and open an NPS account (bank or post office) — it also saves tax under 80C. Aim to invest ${monthlySurplus > 0 ? `around ₹${monthlySurplus.toLocaleString()} per month` : 'whatever you can spare'} from your surplus.`;
+    } else if (hasLongTermGoal) {
+      suggestion = `You have long-term goals — good fit for a monthly SIP into diversified equity mutual funds or an index fund via an AMC app, plus a PPF for tax-free growth. ${monthlySurplus > 0 ? `You can start with about ₹${monthlySurplus.toLocaleString()} per month.` : 'Start small with what you can spare each month.'}`;
+    } else if (q.includes('safest') || q.includes('safe') || q.includes('short')) {
+      suggestion = `For safe, short-term parking, book an FD in your bank app or use a liquid fund. Keep 3–6 months of expenses in an emergency fund first.`;
+    } else {
+      suggestion = `A balanced starter plan: 1) Emergency fund in a savings account/liquid fund (3–6 months of expenses), 2) an FD for goals under a year, 3) a monthly SIP into an index fund for 3+ year goals, and 4) PPF/NPS for retirement. ${monthlySurplus > 0 ? `Based on your surplus, you could start investing around ₹${monthlySurplus.toLocaleString()} per month.` : 'Start small — even ₹500 a month compounds over time.'}`;
+    }
+    return `${suggestion} Investments carry market risk; this is general guidance, not professional financial advice.`;
+  }
+
   if (q.includes('retirement') || q.includes('save') || q.includes('on track')) {
     const totalAssets = transactions.filter((t) => t.amount > 0).reduce((s, t) => s + t.amount, 0);
     const goalNames = goals.map((g) => g.name).join(', ');
