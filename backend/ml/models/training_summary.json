@@ -1,0 +1,26 @@
+[
+  {
+    "model": "categorization",
+    "accuracy": 0.9898,
+    "samples": 985
+  },
+  {
+    "model": "spending_forecast",
+    "r2_score": 0.507,
+    "samples": 23
+  },
+  {
+    "model": "anomaly_detector",
+    "anomalies": 50,
+    "samples": 985
+  },
+  {
+    "model": "budget_optimizer",
+    "categories": 3
+  },
+  {
+    "model": "goal_predictor",
+    "r2_score": 0.8811,
+    "samples": 20
+  }
+]

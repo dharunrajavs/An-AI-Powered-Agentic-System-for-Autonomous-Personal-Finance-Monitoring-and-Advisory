@@ -1,0 +1,26 @@
+[
+  {
+    "id": "acct_001",
+    "institution": "Chase",
+    "nickname": "Chase Checking",
+    "mask": "4821",
+    "balance": 3240.55,
+    "syncStatus": "synced"
+  },
+  {
+    "id": "acct_002",
+    "institution": "Chase",
+    "nickname": "Chase Sapphire Credit Card",
+    "mask": "7710",
+    "balance": -1284.32,
+    "syncStatus": "synced"
+  },
+  {
+    "id": "acct_003",
+    "institution": "Ally Bank",
+    "nickname": "Ally Savings",
+    "mask": "0093",
+    "balance": 27300.0,
+    "syncStatus": "synced"
+  }
+]

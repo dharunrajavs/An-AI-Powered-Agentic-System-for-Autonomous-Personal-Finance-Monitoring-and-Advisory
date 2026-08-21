@@ -1,0 +1,128 @@
+import '@testing-library/jest-native';
+
+jest.mock('@react-native-async-storage/async-storage', () =>
+  require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
+);
+
+const mockReact = require('react');
+
+jest.mock('react-native-reanimated', () => {
+  const noop = () => {};
+  const mockValue = (v) => ({ value: v });
+  const Animated = { createAnimatedComponent: (C) => C };
+  return {
+    __esModule: true,
+    default: Animated,
+    useSharedValue: mockValue,
+    useAnimatedStyle: (fn) => fn(),
+    useAnimatedScrollHandler: () => ({}),
+    useAnimatedGestureHandler: () => ({}),
+    useDerivedValue: mockValue,
+    useAnimatedRef: () => ({ current: null }),
+    withTiming: (v) => v,
+    withSpring: (v) => v,
+    withDelay: (_d, v) => v,
+    withRepeat: (v) => v,
+    withSequence: (...v) => v[v.length - 1],
+    cancelAnimation: noop,
+    makeMutable: mockValue,
+    Easing: { linear: (v) => v, ease: (v) => v },
+    interpolate: (v) => v,
+    interpolateColor: (v) => v,
+    runOnJS: (fn) => fn,
+    runOnUI: (fn) => fn,
+    useAnimatedReaction: noop,
+    useEvent: () => ({}),
+    useHandler: () => ({}),
+    reduceMotion: { get: () => false },
+    processColor: (c) => c,
+    enableLayoutAnimations: noop,
+    configureReanimatedLogger: noop,
+    isSharedValue: (v) => v && typeof v === 'object' && 'value' in v,
+    SharedTransition: { custom: () => ({}), duration: () => ({}) },
+    FadeIn: { duration: () => ({}) },
+    FadeOut: { duration: () => ({}) },
+    SlideInDown: { duration: () => ({}) },
+    SlideInUp: { duration: () => ({}) },
+    SlideOutDown: { duration: () => ({}) },
+    SlideOutUp: { duration: () => ({}) },
+    LinearTransition: { duration: () => ({}) },
+    Layout: { duration: () => ({}) },
+    ZoomIn: { duration: () => ({}) },
+    ZoomOut: { duration: () => ({}) },
+  };
+});
+
+jest.mock('@gorhom/bottom-sheet', () => {
+  const React = mockReact;
+  const { forwardRef, useImperativeHandle } = React;
+  const BottomSheetModal = forwardRef(({ children }, ref) => {
+    useImperativeHandle(ref, () => ({
+      present: jest.fn(),
+      dismiss: jest.fn(),
+    }));
+    return React.createElement('View', null, children);
+  });
+  const BottomSheetView = ({ children }) => React.createElement('View', null, children);
+  const BottomSheetModalProvider = ({ children }) =>
+    React.createElement(React.Fragment, null, children);
+  return { BottomSheetModal, BottomSheetView, BottomSheetModalProvider };
+});
+
+jest.mock('react-native-svg', () => {
+  const React = mockReact;
+  const mockComp = (name) => {
+    const C = (props) => React.createElement('View', props);
+    C.displayName = name;
+    return C;
+  };
+  return new Proxy(
+    {},
+    {
+      get: (target, prop) => {
+        if (prop === '__esModule') return true;
+        return mockComp(String(prop));
+      },
+    }
+  );
+});
+
+jest.mock('lucide-react-native', () => {
+  const React = mockReact;
+  return new Proxy(
+    {},
+    {
+      get: (target, prop) => {
+        if (prop === '__esModule') return true;
+        const C = (props) => React.createElement('View', props);
+        C.displayName = String(prop);
+        return C;
+      },
+    }
+  );
+});
+
+jest.mock('react-native-safe-area-context', () => {
+  const React = mockReact;
+  const SafeAreaProvider = ({ children, ...props }) => React.createElement('View', props, children);
+  const SafeAreaView = ({ children, ...props }) => React.createElement('View', props, children);
+  const useSafeAreaInsets = () => ({ top: 0, right: 0, bottom: 0, left: 0 });
+  return { SafeAreaProvider, SafeAreaView, useSafeAreaInsets };
+});
+
+jest.mock('@supabase/supabase-js', () => {
+  return {
+    createClient: jest.fn(() => ({
+      auth: {
+        getSession: jest.fn().mockResolvedValue({ data: { session: null }, error: null }),
+        onAuthStateChange: jest.fn(() => ({ data: { subscription: { unsubscribe: jest.fn() } } })),
+        signInWithPassword: jest.fn(),
+        signUp: jest.fn(),
+        signOut: jest.fn(),
+      },
+      from: jest.fn(() => ({
+        select: jest.fn(() => ({ eq: jest.fn(() => ({ data: [], error: null })) })),
+      })),
+    })),
+  };
+});

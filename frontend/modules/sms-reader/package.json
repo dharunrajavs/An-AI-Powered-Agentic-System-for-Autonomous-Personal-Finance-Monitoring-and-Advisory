@@ -1,0 +1,10 @@
+{
+  "name": "sms-reader",
+  "version": "0.1.0",
+  "description": "Expo module for reading SMS messages and monitoring incoming bank transaction SMS",
+  "main": "src/index.ts",
+  "android": {
+    "sourceDir": "android"
+  },
+  "expo-module-config": "expo-module.config.json"
+}
