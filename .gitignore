@@ -33,6 +33,7 @@ yarn-error.*
 *.pem
 
 # local env files
+.env
 .env*.local
 
 # typescript
@@ -44,3 +45,25 @@ yarn-error.*
 /frontend/android
 **/build/
 **/.gradle/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.env
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ML models
+*.pkl
+*.h5
+*.pt
+*.onnx
+
+# Backend
+backend/.claude/
